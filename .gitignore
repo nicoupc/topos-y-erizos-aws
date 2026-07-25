@@ -1,0 +1,25 @@
+# Dependencias
+node_modules/
+
+# Artefactos de build / CDK
+cdk.out/
+*.d.ts
+infra/**/*.js
+!infra/lambda/*.js
+!infra/jest.config.js
+
+# Variables de entorno y credenciales (nunca versionar)
+.env
+.env.*
+*.pem
+.aws/
+
+# Plataformas de despliegue
+.vercel/
+.amplify/
+amplify-deploy.zip
+
+# Sistema operativo / editor
+.DS_Store
+Thumbs.db
+.vscode/
