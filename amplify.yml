@@ -11,5 +11,6 @@ frontend:
       - index.html
       - style.css
       - script.js
+      - customHttp.yml
   cache:
     paths: []
