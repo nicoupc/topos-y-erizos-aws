@@ -3,7 +3,7 @@
 Juego arcade para navegador con **ranking global en tiempo real**, funcionando sobre
 una arquitectura *serverless* en AWS.
 
-### ▶️ Jugar ahora: **https://main.d1y0mobw6pwc7h.amplifyapp.com**
+### ▶️ Jugar ahora: **https://main.d2h64nxxh4ok2a.amplifyapp.com**
 
 ---
 
@@ -61,6 +61,9 @@ datos: ahí se validan los datos y se guarda el récord en **DynamoDB**.
 - **Costo cero.** Toda la solución corre dentro de la capa gratuita de AWS.
 
 ---
+
+- **Despliegue continuo.** Cada cambio en la rama `main` se publica automáticamente en
+  Amplify, sin pasos manuales.
 
 ## 🚀 Cómo desplegarlo
 
