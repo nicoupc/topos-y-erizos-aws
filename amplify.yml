@@ -1,0 +1,15 @@
+version: 1
+frontend:
+  phases:
+    build:
+      commands:
+        - echo "Sitio estatico: no requiere paso de build"
+  artifacts:
+    # Solo se publican los archivos del juego; la carpeta infra/ (IaC) no se expone.
+    baseDirectory: /
+    files:
+      - index.html
+      - style.css
+      - script.js
+  cache:
+    paths: []
