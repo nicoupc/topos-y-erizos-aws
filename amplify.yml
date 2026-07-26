@@ -3,9 +3,9 @@ frontend:
   phases:
     build:
       commands:
-        - echo "Sitio estatico: no requiere paso de build"
+        - echo skip
   artifacts:
-    # Solo se publican los archivos del juego; la carpeta infra/ (IaC) no se expone.
+    # Se publican solo los archivos del sitio; la carpeta infra (IaC) no se expone.
     baseDirectory: /
     files:
       - index.html
