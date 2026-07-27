@@ -2360,7 +2360,18 @@
 
   // Despierta el audio en el PRIMER gesto del usuario (fase de captura, antes de
   // cualquier otro handler). Es el costo mas caro del primer clic.
-  document.addEventListener("pointerdown", warmUpAudio, { capture: true, once: true });
+  document.addEventListener("pointerdown", () => {
+    warmUpAudio();
+    if (!PERF) return;
+    // Mide el primer clic separando JS de PINTADO. La diferencia entre ambos
+    // numeros es el costo de dibujar (sombras, filtros, capas), que no aparece
+    // en las mediciones de JavaScript.
+    const t0 = performance.now();
+    setTimeout(() => perfLog("primer clic > JS terminado", performance.now() - t0), 0);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      perfLog("primer clic > PANTALLA actualizada", performance.now() - t0);
+    }));
+  }, { capture: true, once: true });
 
   document.addEventListener("pointerdown", () => {
     hammerCursor.classList.remove("swinging");
