@@ -1000,6 +1000,30 @@
   }
 
   /* ---------------------------------------------------------------------------
+     PERSONAJES BONUS (Peccy, Kiro, Cody, Balde S3)
+     --------------------------------------------------------------------------- */
+  const BONUS_SCORES = {
+    "bonus_peccy-3": 100,
+    "bonus_cody3-1": 100,
+    "bonus_s32-1": 100,
+    "bonus_peccy-5": 200,
+    "bonus_cody3-3": 200,
+    "bonus_s32-4": 200,
+    "bonus_kiro-1": 300,
+    "bonus_kiro-4": 300,
+    "bonus_s32-3": 300,
+    "bonus_kiro-3": 500,
+    "bonus_kiro-5": 500,
+    "bonus_cody3-4": 500
+  };
+
+  const BONUS_KINDS = Object.keys(BONUS_SCORES);
+
+  function getRandomBonusKind() {
+    return BONUS_KINDS[Math.floor(Math.random() * BONUS_KINDS.length)];
+  }
+
+  /* ---------------------------------------------------------------------------
      CACHE DE PERSONAJES (SVG)
      Antes: en cada aparicion se generaba el texto del SVG y el navegador tenia
      que PARSEARLO de nuevo (costoso, y crecia con cada personaje nuevo).
@@ -1014,7 +1038,18 @@
     let tpl = critterTemplateCache.get(key);
     if (!tpl) {
       tpl = document.createElement("div");
-      tpl.innerHTML = getCritterHTML(kind, state);
+      if (kind && kind.startsWith("bonus_")) {
+        const bonusId = kind.replace("bonus_", "");
+        if (window.BONUS && typeof window.BONUS.crear === "function") {
+          const bonusNode = window.BONUS.crear(bonusId);
+          if (bonusNode) tpl.appendChild(bonusNode);
+          else tpl.innerHTML = getCritterHTML(kind, state);
+        } else {
+          tpl.innerHTML = getCritterHTML(kind, state);
+        }
+      } else {
+        tpl.innerHTML = getCritterHTML(kind, state);
+      }
       critterTemplateCache.set(key, tpl);
     }
     el.textContent = "";
@@ -1032,7 +1067,8 @@
       ["bucket_mole", 2], ["bucket_mole", 1],
       ["fork_mole", 1],
       ["zombie_mole", 2], ["zombie_mole", 1],
-      ["bubble_heart", 1], ["bubble_hammer", 1]
+      ["bubble_heart", 1], ["bubble_hammer", 1],
+      ...BONUS_KINDS.map(k => [k, 1])
     ];
     const warm = () => {
       const t0 = performance.now();
@@ -1043,6 +1079,7 @@
     if (window.requestIdleCallback) requestIdleCallback(warm, { timeout: 2000 });
     else setTimeout(warm, 300);
   }
+
 
   function getCritterHTML(kind, state) {
     if (kind === "mole") return getMoleSVG("normal", "sparkle");
@@ -1441,7 +1478,13 @@
       return "erizo";
     }
 
+    // Small chance (~10%) to spawn a bonus character (Peccy, Kiro, Cody, S3 Bucket)
+    if (Math.random() < 0.10) {
+      return getRandomBonusKind();
+    }
+
     const roll = Math.random();
+
 
     // Spawn ratios scale depending on the Phase (1 to 10)
     if (currentPhase === 1) {
@@ -1954,6 +1997,31 @@
       playSFX("bubble_pop");
       executeMegaHammer();
     }
+    else if (kind && kind.startsWith("bonus_")) {
+      // Bonus Character Defeat: Awards high points (+100, +200, +300, +500)
+      const basePoints = BONUS_SCORES[kind] || 100;
+      const pointsGained = basePoints * multiplier;
+      score += pointsGained;
+      showScorePop(hole, `+${pointsGained}`, "#ffd700");
+      showBurst(hole, ["✨", "⭐", "🎉"]);
+      playSFX("victory_chime");
+
+      if (!isHorde) {
+        phaseHits++;
+        const target = PHASE_GOALS[phase - 1] || 15;
+        if (phaseHits >= target) {
+          startHorde();
+        }
+      }
+
+      combo++;
+      const prevMult = multiplier;
+      multiplier = Math.min(3, 1 + Math.floor(combo / 5));
+      if (multiplier > prevMult) {
+        showToast(`¡Combo x${multiplier}!`);
+      }
+    }
+
     else {
       // Standard Mole defeat
       let basePoints = 10;
