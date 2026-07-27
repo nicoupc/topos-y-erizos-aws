@@ -245,6 +245,49 @@
     sfxGain.connect(masterGain);
   }
 
+  /* ---------------------------------------------------------------------------
+     PRECALENTADO DE AUDIO
+     Los navegadores mantienen el sistema de audio dormido hasta el primer gesto
+     del usuario. Despertarlo (arrancar el dispositivo de sonido del sistema) es
+     la operacion mas lenta del primer clic. Esto lo hace de entrada, en el mismo
+     gesto (requisito del navegador), con una nota inaudible que fuerza la
+     inicializacion completa del pipeline.
+     --------------------------------------------------------------------------- */
+  /* Medicion opcional: agregando ?perf=1 a la URL, la consola informa cuanto
+     tarda cada parte del arranque. Sirve para confirmar donde se va el tiempo
+     sin tener que abrir el perfilador del navegador. */
+  const PERF = new URLSearchParams(location.search).has("perf");
+  function perfLog(label, ms) {
+    if (PERF) console.log(`[perf] ${label}: ${ms.toFixed(1)} ms`);
+  }
+
+  let audioWarmedUp = false;
+  function warmUpAudio() {
+    if (audioWarmedUp) return;
+    const t0 = performance.now();
+    initAudio();
+    if (!actx) return;
+    if (actx.state === "suspended") actx.resume();
+    try {
+      const osc = actx.createOscillator();
+      const g = actx.createGain();
+      g.gain.value = 0.0001; // inaudible
+      osc.connect(g);
+      g.connect(actx.destination);
+      osc.start();
+      osc.stop(actx.currentTime + 0.02);
+    } catch (e) { /* si falla, el audio se inicializa igual en el primer SFX */ }
+    audioWarmedUp = true;
+    perfLog("despertar audio (primer gesto)", performance.now() - t0);
+  }
+
+  /* Agenda el sonido para el siguiente tick: asi el navegador dibuja el golpe
+     PRIMERO y el jugador siente respuesta inmediata, aunque sintetizar el audio
+     tarde unos milisegundos. El retardo es imperceptible (~1 frame). */
+  function playSFXSoon(name) {
+    setTimeout(() => playSFX(name), 0);
+  }
+
   function playSynthNote(freq, startTime, duration, type, peakVol, destNode, filterFreq = 0) {
     if (!actx) return;
     const osc = actx.createOscillator();
@@ -956,6 +999,51 @@
     `;
   }
 
+  /* ---------------------------------------------------------------------------
+     CACHE DE PERSONAJES (SVG)
+     Antes: en cada aparicion se generaba el texto del SVG y el navegador tenia
+     que PARSEARLO de nuevo (costoso, y crecia con cada personaje nuevo).
+     Ahora: cada variante se parsea UNA sola vez y despues se clona, que es
+     mucho mas rapido. La clave es tipo + vida, los unicos datos que cambian
+     el dibujo.
+     --------------------------------------------------------------------------- */
+  const critterTemplateCache = new Map();
+
+  function renderCritter(el, kind, state) {
+    const key = `${kind}|${state && state.hp != null ? state.hp : ""}`;
+    let tpl = critterTemplateCache.get(key);
+    if (!tpl) {
+      tpl = document.createElement("div");
+      tpl.innerHTML = getCritterHTML(kind, state);
+      critterTemplateCache.set(key, tpl);
+    }
+    el.textContent = "";
+    for (const child of tpl.children) {
+      el.appendChild(child.cloneNode(true));
+    }
+  }
+
+  /* Pre-genera (y pre-parsea) los personajes mientras el jugador esta en el menu,
+     en tiempo libre del navegador. Asi el primer golpe ya encuentra todo listo. */
+  function prewarmCritterCache() {
+    const kinds = [
+      ["mole", 1], ["erizo", 1], ["disguise_mole", 1],
+      ["helmet_mole", 2], ["helmet_mole", 1],
+      ["bucket_mole", 2], ["bucket_mole", 1],
+      ["fork_mole", 1],
+      ["zombie_mole", 2], ["zombie_mole", 1],
+      ["bubble_heart", 1], ["bubble_hammer", 1]
+    ];
+    const warm = () => {
+      const t0 = performance.now();
+      const scratch = document.createElement("div");
+      kinds.forEach(([kind, hp]) => renderCritter(scratch, kind, { hp }));
+      perfLog(`pre-parseo de ${kinds.length} personajes`, performance.now() - t0);
+    };
+    if (window.requestIdleCallback) requestIdleCallback(warm, { timeout: 2000 });
+    else setTimeout(warm, 300);
+  }
+
   function getCritterHTML(kind, state) {
     if (kind === "mole") return getMoleSVG("normal", "sparkle");
     if (kind === "erizo") return getErizoSVG();
@@ -1480,8 +1568,8 @@
     }
     hole.hp = hole.maxHp;
 
-    // Render initial SVG
-    hole.critterEl.innerHTML = getCritterHTML(kind, { ...hole.state, hp: hole.hp });
+    // Render initial SVG (desde cache: se parsea una vez y luego se clona)
+    renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp });
 
     // Make ~80% of critters blink almost immediately on spawn
     // by using a negative animation-delay to jump into the blink keyframes
@@ -1704,7 +1792,7 @@
         }
         
         hole.hp = hole.maxHp;
-        hole.critterEl.innerHTML = getCritterHTML(kind, { ...hole.state, hp: hole.hp });
+        renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp });
 
         // Force browser reflow to guarantee CSS transition triggers (crucial in fast-spawning Horde Mode)
         const child = hole.critterEl.firstElementChild;
@@ -1772,8 +1860,8 @@
   function onHolePointerDown(e) {
     if (!running || paused) return;
 
-    // Trigger cursor swinging/clicking SFX
-    playSFX("swing");
+    // Sonido diferido: primero se dibuja el golpe, el audio va un tick despues
+    playSFXSoon("swing");
 
     const index = Number(e.currentTarget.dataset.index);
     const hole = holes[index];
@@ -1829,13 +1917,13 @@
         showBurst(hole, ["⚙️"]);
         showScorePop(hole, "¡CASCO!", "#ffffff");
         playSFX("helmet_ting");
-        hole.critterEl.innerHTML = getCritterHTML(kind, { ...hole.state, hp: hole.hp }); // Renders without helmet
+        renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp }); // Renders without helmet
       } 
       else if (kind === "bucket_mole") {
         showBurst(hole, ["💥"]);
         showScorePop(hole, "¡ABOLLADO!", "#ffffff");
         playSFX("bucket_clonk");
-        hole.critterEl.innerHTML = getCritterHTML(kind, { ...hole.state, hp: hole.hp }); // Renders dented bucket
+        renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp }); // Renders dented bucket
       }
       else if (kind === "zombie_mole") {
         showBurst(hole, ["☠️", "💥"]);
@@ -1843,7 +1931,7 @@
         score += pointsGained;
         showScorePop(hole, `+${pointsGained}`, "#cfd8dc");
         playSFX("hit_mole");
-        hole.critterEl.innerHTML = getCritterHTML(kind, { ...hole.state, hp: hole.hp }); // More cracks
+        renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp }); // More cracks
         updateHud();
       }
       if (navigator.vibrate) navigator.vibrate(15);
@@ -2270,6 +2358,21 @@
     hammerCursor.style.top = `${e.clientY}px`;
   });
 
+  // Despierta el audio en el PRIMER gesto del usuario (fase de captura, antes de
+  // cualquier otro handler). Es el costo mas caro del primer clic.
+  document.addEventListener("pointerdown", () => {
+    warmUpAudio();
+    if (!PERF) return;
+    // Mide el primer clic separando JS de PINTADO. La diferencia entre ambos
+    // numeros es el costo de dibujar (sombras, filtros, capas), que no aparece
+    // en las mediciones de JavaScript.
+    const t0 = performance.now();
+    setTimeout(() => perfLog("primer clic > JS terminado", performance.now() - t0), 0);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      perfLog("primer clic > PANTALLA actualizada", performance.now() - t0);
+    }));
+  }, { capture: true, once: true });
+
   document.addEventListener("pointerdown", () => {
     hammerCursor.classList.remove("swinging");
     void hammerCursor.offsetWidth; // Reflow
@@ -2512,7 +2615,7 @@
     
     // Render SVG
     const state = kind === "fork_mole" ? { forkUp: true } : { hp: 1 };
-    menuCritter.innerHTML = getCritterHTML(kind, state);
+    renderCritter(menuCritter, kind, state);
     
     // Clean up classes
     menuMoleContainer.classList.remove("hit");
@@ -2560,7 +2663,7 @@
       menuCritterIsHit = true;
       clearTimeout(menuCritterHideTimeoutId);
       
-      playSFX("swing");
+      playSFXSoon("swing");
       
       if (menuCritterKind === "erizo") {
         playSFX("hit_erizo");
@@ -2592,6 +2695,7 @@
   renderProfileUI();
   fetchLeaderboard();
   syncLocalRecordWithServer();
+  prewarmCritterCache(); // pre-parsea los personajes mientras el jugador esta en el menu
   
   // Interactive Menu Critter
   initMenuCritterEvents();

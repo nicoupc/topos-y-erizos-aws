@@ -2637,3 +2637,29 @@ body {
     to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
   }
 }
+
+/* ==========================================================================
+   OPTIMIZACION DE RENDIMIENTO
+   'will-change' le avisa al navegador que estos elementos se van a animar, para
+   que prepare las capas graficas ANTES del primer movimiento. Sin esta pista,
+   el navegador crea la capa justo en el instante del primer golpe, y eso es
+   parte del tiron inicial que se sentia.
+   Se aplica solo a los 4 elementos que realmente se animan: no conviene abusar
+   de will-change porque cada capa consume memoria de video.
+   ========================================================================== */
+.critter,
+.burst,
+.score-pop,
+.hammer-cursor {
+  will-change: transform;
+}
+
+/* Respeta la preferencia del sistema de reducir animaciones (accesibilidad) */
+@media (prefers-reduced-motion: reduce) {
+  .critter,
+  .burst,
+  .score-pop,
+  .hammer-cursor {
+    will-change: auto;
+  }
+}
