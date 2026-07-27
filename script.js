@@ -206,6 +206,7 @@
     // Existing user who already had a custom name saved prior to this feature
     localStorage.setItem("toposyerizos-is-custom-name", "true");
   }
+  let playerAvatar = localStorage.getItem("toposyerizos-playeravatar") || "mole";
   const AVATAR_LIST = [
     "mole", "erizo", "helmet_mole", "disguise_mole", "bucket_mole", "fork_mole", "zombie_mole",
     "bonus_peccy-3", "bonus_peccy-5",
@@ -214,6 +215,7 @@
     "bonus_s32-1", "bonus_s32-3", "bonus_s32-4"
   ];
   let selectedAvatarIndex = AVATAR_LIST.indexOf(playerAvatar);
+
 
   if (selectedAvatarIndex === -1) selectedAvatarIndex = 0;
   
