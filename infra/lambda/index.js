@@ -29,7 +29,20 @@ const ALLOWED_AVATARS = new Set([
   "bucket_mole",
   "fork_mole",
   "zombie_mole",
+  "bonus_peccy-3",
+  "bonus_peccy-5",
+  "bonus_kiro-1",
+  "bonus_kiro-3",
+  "bonus_kiro-4",
+  "bonus_kiro-5",
+  "bonus_cody3-1",
+  "bonus_cody3-3",
+  "bonus_cody3-4",
+  "bonus_s32-1",
+  "bonus_s32-3",
+  "bonus_s32-4",
 ]);
+
 
 function response(statusCode, body) {
   return { statusCode, headers: HEADERS, body: JSON.stringify(body) };

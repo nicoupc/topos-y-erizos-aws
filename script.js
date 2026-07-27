@@ -206,9 +206,15 @@
     // Existing user who already had a custom name saved prior to this feature
     localStorage.setItem("toposyerizos-is-custom-name", "true");
   }
-  let playerAvatar = localStorage.getItem("toposyerizos-playeravatar") || "mole";
-  const AVATAR_LIST = ["mole", "erizo", "helmet_mole", "disguise_mole", "bucket_mole", "fork_mole", "zombie_mole"];
+  const AVATAR_LIST = [
+    "mole", "erizo", "helmet_mole", "disguise_mole", "bucket_mole", "fork_mole", "zombie_mole",
+    "bonus_peccy-3", "bonus_peccy-5",
+    "bonus_kiro-1", "bonus_kiro-3", "bonus_kiro-4", "bonus_kiro-5",
+    "bonus_cody3-1", "bonus_cody3-3", "bonus_cody3-4",
+    "bonus_s32-1", "bonus_s32-3", "bonus_s32-4"
+  ];
   let selectedAvatarIndex = AVATAR_LIST.indexOf(playerAvatar);
+
   if (selectedAvatarIndex === -1) selectedAvatarIndex = 0;
   
   let highscores = [];
@@ -1214,6 +1220,13 @@
   }
 
   function getAvatarSVG(kind) {
+    if (kind && kind.startsWith("bonus_")) {
+      const bonusId = kind.replace("bonus_", "");
+      if (window.BONUS && typeof window.BONUS.crear === "function") {
+        const bonusEl = window.BONUS.crear(bonusId);
+        if (bonusEl) return bonusEl.outerHTML;
+      }
+    }
     if (kind === "mole") return getMoleSVG("normal", "normal");
     if (kind === "erizo") return getErizoSVG();
     if (kind === "helmet_mole") return getHelmetMoleSVG({ hp: 2 });
@@ -1223,6 +1236,7 @@
     if (kind === "zombie_mole") return getZombieMoleSVG({ hp: 5 });
     return getMoleSVG("normal", "normal");
   }
+
 
   function getLocalRecord() {
     const scores = getHighscores();
@@ -1469,6 +1483,12 @@
      GAMEPLAY SPATIAL CALCULATIONS & SELECTION
      ========================================================================= */
 
+  // Modo Demostracion / Pruebas de Hackaton:
+  // Si TEST_HIGH_SPAWN_RATE es true, los personajes bonus (Peccy, Kiro, Cody, S3)
+  // tienen un 50% de probabilidad de aparecer desde la Fase 1 para que
+  // sean inmediatamente visibles y apreciables en las pruebas del juego.
+  const TEST_HIGH_SPAWN_RATE = true;
+
   function pickCritterKind(currentPhase) {
     const r = Math.random();
     const cfg = DIFFICULTIES[difficulty];
@@ -1478,12 +1498,14 @@
       return "erizo";
     }
 
-    // Small chance (~10%) to spawn a bonus character (Peccy, Kiro, Cody, S3 Bucket)
-    if (Math.random() < 0.10) {
+    // High chance in test/demo mode (50%), normal chance (15%) in production mode
+    const bonusChance = TEST_HIGH_SPAWN_RATE ? 0.50 : 0.15;
+    if (Math.random() < bonusChance) {
       return getRandomBonusKind();
     }
 
     const roll = Math.random();
+
 
 
     // Spawn ratios scale depending on the Phase (1 to 10)
