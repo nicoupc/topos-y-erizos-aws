@@ -1770,13 +1770,15 @@ body {
 }
 
 .mini-leaderboard-list-container {
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 12px;
-  padding: 8px;
-  border: 2px dashed #b1794b;
+  background: #fff8ea;
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 2.5px dashed #b1794b;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
 }
+
 
 .mini-leaderboard-list {
   display: flex;
@@ -2133,11 +2135,11 @@ body {
   column-gap: 8px;
   font-size: 0.78rem;
   font-weight: 900;
-  color: #ffffff;
-  text-shadow: 0 1.5px 0 var(--wood-dark);
+  color: #7d441c;
+  text-shadow: none;
   text-transform: uppercase;
   padding-bottom: 6px;
-  border-bottom: 2px dashed rgba(255,255,255,0.4);
+  border-bottom: 2px dashed #b1794b;
   margin-bottom: 6px;
 }
 
@@ -2164,13 +2166,13 @@ body {
   column-gap: 8px;
   align-items: center;
   padding: 6px 8px;
-  background: var(--parch);
-  border: 2.5px solid var(--wood-dark);
-  border-radius: 12px;
-  box-shadow: 0 3px 0 var(--wood-dark);
+  background: transparent;
+  border-radius: 10px;
+  box-shadow: none;
   box-sizing: border-box;
   width: 100%;
 }
+
 
 .leaderboard-row.my-row {
   background: #fff59d !important;
