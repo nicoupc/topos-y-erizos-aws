@@ -52,84 +52,25 @@
 
   <!-- Background Ambient Scene -->
   <div class="scene" aria-hidden="true">
-    <!-- 1. Cute Smiling Sun -->
-    <div class="sun">
-      <svg viewBox="0 0 120 120" width="100%" height="100%">
-        <circle cx="60" cy="60" r="30" fill="#ffe17a" stroke="#f0b429" stroke-width="4"/>
-        <g stroke="#f0b429" stroke-width="4" stroke-linecap="round">
-          <path d="M60 18v-10M60 102v10M18 60h-10M102 60h10M31 31l-7-7M89 31l7-7M31 89l-7 7M89 89l7 7"/>
-        </g>
-        <circle cx="51" cy="56" r="3.5" fill="#c98a12"/>
-        <circle cx="69" cy="56" r="3.5" fill="#c98a12"/>
-        <path d="M49 68Q60 76 71 68" fill="none" stroke="#c98a12" stroke-width="3.5" stroke-linecap="round"/>
-        <circle cx="44" cy="64" r="4.5" fill="#ffb4a2" opacity="0.7"/>
-        <circle cx="76" cy="64" r="4.5" fill="#ffb4a2" opacity="0.7"/>
-      </svg>
+    <div class="sun"></div>
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+    
+    <!-- Nueva Cerca de Madera (de archivos de diseño) -->
+    <div class="fence">
+      <div class="rail r1"></div>
+      <div class="rail r2"></div>
+      <div class="posts" id="fencePosts"></div>
     </div>
 
-    <!-- 2. Fluffy White Clouds -->
-    <div class="cloud a">
-      <svg viewBox="0 0 100 50" width="100%" height="100%">
-        <path d="M12 40Q10 24 26 24Q30 8 48 10Q64 4 72 18Q90 18 88 34Q90 44 74 46L24 46Q10 46 12 40Z" fill="#ffffff" stroke="#cfe8f0" stroke-width="4"/>
-      </svg>
-    </div>
-    <div class="cloud b">
-      <svg viewBox="0 0 100 50" width="100%" height="100%">
-        <path d="M12 40Q10 24 26 24Q30 8 48 10Q64 4 72 18Q90 18 88 34Q90 44 74 46L24 46Q10 46 12 40Z" fill="#ffffff" stroke="#cfe8f0" stroke-width="4"/>
-      </svg>
-    </div>
-
-    <!-- 3. Rolling Green Hills -->
-    <div class="hills"></div>
-
-    <!-- 4. Stylized Round Trees with Fruit -->
-    <div class="tree left">
-      <svg viewBox="-70 -70 140 170" width="100%" height="100%">
-        <defs>
-          <radialGradient id="can1" cx="35%" cy="25%" r="90%">
-            <stop offset="0%" stop-color="#9ad75a"/>
-            <stop offset="60%" stop-color="#6cb83e"/>
-            <stop offset="100%" stop-color="#4b8b24"/>
-          </radialGradient>
-        </defs>
-        <path d="M0 96 L0 30 M0 56 Q-18 46 -26 30 M0 46 Q16 40 24 24" stroke="#5a3212" stroke-width="12" stroke-linecap="round" fill="none"/>
-        <g stroke="#2e6410" stroke-width="5.5">
-          <circle cx="-30" cy="4" r="30" fill="url(#can1)"/>
-          <circle cx="32" cy="-2" r="32" fill="url(#can1)"/>
-          <circle cx="0" cy="-32" r="36" fill="url(#can1)"/>
-        </g>
-        <circle cx="-12" cy="-44" r="10" fill="rgba(255,255,255,0.3)"/>
-        <circle cx="-26" cy="-4" r="5.5" fill="#ff6b6b" stroke="#d63030" stroke-width="2.5"/>
-        <circle cx="26" cy="8" r="5.5" fill="#ff6b6b" stroke="#d63030" stroke-width="2.5"/>
-        <circle cx="10" cy="-38" r="5.5" fill="#ff6b6b" stroke="#d63030" stroke-width="2.5"/>
-      </svg>
-    </div>
-    <div class="tree right">
-      <svg viewBox="-70 -70 140 170" width="100%" height="100%">
-        <defs>
-          <radialGradient id="can2" cx="35%" cy="25%" r="90%">
-            <stop offset="0%" stop-color="#8fce4e"/>
-            <stop offset="60%" stop-color="#79c243"/>
-            <stop offset="100%" stop-color="#3e7b1a"/>
-          </radialGradient>
-        </defs>
-        <path d="M0 96 L0 30 M0 56 Q-18 46 -26 30 M0 46 Q16 40 24 24" stroke="#4e2912" stroke-width="12" stroke-linecap="round" fill="none"/>
-        <g stroke="#255a0d" stroke-width="5.5">
-          <circle cx="-30" cy="4" r="30" fill="url(#can2)"/>
-          <circle cx="32" cy="-2" r="32" fill="url(#can2)"/>
-          <circle cx="0" cy="-32" r="36" fill="url(#can2)"/>
-        </g>
-        <circle cx="-12" cy="-44" r="10" fill="rgba(255,255,255,0.25)"/>
-        <circle cx="-26" cy="-4" r="5.5" fill="#ff6b6b" stroke="#d63030" stroke-width="2.5"/>
-        <circle cx="26" cy="8" r="5.5" fill="#ff6b6b" stroke="#d63030" stroke-width="2.5"/>
-        <circle cx="10" cy="-38" r="5.5" fill="#ff6b6b" stroke="#d63030" stroke-width="2.5"/>
-      </svg>
-    </div>
-
-    <!-- 5. Wooden Fence -->
-    <div class="bg-fence"></div>
     <div class="bg-flowers"></div>
+    <div class="bg-forest">
+      <div class="bg-tree t-left"></div>
+      <div class="bg-tree t-right"></div>
+    </div>
   </div>
+
 
 
   <!-- Custom Wooden Hammer Cursor (for non-touch devices) -->
