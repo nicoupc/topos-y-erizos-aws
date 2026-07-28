@@ -2792,44 +2792,45 @@ body {
 @keyframes trembleBody{0%,58%,84%,100%{transform:translateX(0)}61%{transform:translateX(-1.2px)}64%{transform:translateX(1.2px)}67%{transform:translateX(-1.2px)}70%{transform:translateX(1.2px)}73%{transform:translateX(-1px)}76%{transform:translateX(1px)}80%{transform:translateX(0)}}
 
 /* ===== topo común ===== */
-@keyframes tiltNat{0%,10%,60%,100%{transform:rotate(0)}16%,30%{transform:rotate(-4deg)}36%,50%{transform:rotate(3.5deg)}56%{transform:rotate(0)}}
-@keyframes lookNat{0%,10%,60%,100%{transform:translateX(0)}16%,30%{transform:translateX(-3.5px)}36%,50%{transform:translateX(3.5px)}56%{transform:translateX(0)}}
-@keyframes pawHello{0%,58%,90%,100%{transform:translate(0,0) rotate(0)}62%{transform:translate(6px,-13px) rotate(28deg)}67%{transform:translate(6px,-13px) rotate(2deg)}72%{transform:translate(6px,-13px) rotate(28deg)}77%{transform:translate(6px,-13px) rotate(2deg)}83%{transform:translate(5px,-11px) rotate(22deg)}}
-@keyframes tongueTease{0%,48%,82%,100%{transform:scaleY(0)}53%{transform:scaleY(.95)}59%{transform:scaleY(.78) rotate(-4deg)}65%{transform:scaleY(.9) rotate(4deg)}71%{transform:scaleY(.78)}77%{transform:scaleY(.4)}}
-@keyframes squintTease{0%,48%,82%,100%{transform:scaleY(1)}54%,76%{transform:scaleY(.72) translateY(.5px)}}
-@keyframes teaseTilt{0%,46%,86%,100%{transform:rotate(0)}54%,78%{transform:rotate(-4deg)}}
-@keyframes teaseEarsL{0%,46%,86%,100%{transform:rotate(0) scale(1)}54%,78%{transform:rotate(-10deg) scale(1.12)}}
-@keyframes teaseEarsR{0%,46%,86%,100%{transform:rotate(0) scale(1)}54%,78%{transform:rotate(10deg) scale(1.12)}}
-@keyframes danceRock{0%,8%,64%,100%{transform:rotate(0)}16%,32%{transform:rotate(-5deg)}24%,40%{transform:rotate(5deg)}48%{transform:rotate(-4deg)}56%{transform:rotate(0)}}
-@keyframes danceEarL{0%,8%,64%,100%{transform:rotate(0)}16%,32%,48%{transform:rotate(14deg)}24%,40%{transform:rotate(-8deg)}}
-@keyframes danceEarR{0%,8%,64%,100%{transform:rotate(0)}16%,32%,48%{transform:rotate(-14deg)}24%,40%{transform:rotate(8deg)}}
-@keyframes dancePawL{0%,8%,64%,100%{transform:rotate(0)}16%,32%{transform:rotate(-18deg) translateY(-2px)}24%,40%{transform:rotate(8deg)}48%{transform:rotate(-8deg)}}
-@keyframes dancePawR{0%,8%,64%,100%{transform:rotate(0)}16%,32%{transform:rotate(18deg) translateY(-2px)}24%,40%{transform:rotate(-8deg)}48%{transform:rotate(8deg)}}
-.a-topo-2b .p-snout{animation:snoutSniff 4.6s infinite}
-.a-topo-2b .critter-nose-tip{animation:noseTwitch2 4.6s infinite}
-.a-topo-2b .p-whisk-l{animation:whiskFlickL 4.6s infinite}
-.a-topo-2b .p-whisk-r{animation:whiskFlickR 4.6s infinite}
-.a-topo-2b .p-ear-l{animation:earTwitchL2 4.6s infinite}
-.a-topo-2b .p-ear-r{animation:earTwitchR2 4.6s infinite}
-.a-topo-2b .p-hair{animation:hairSway 2.4s ease-in-out infinite}
-.a-topo-2b .critter-eye{animation:blinkReal 4.6s infinite}
-.a-topo-3b .p-body{animation:tiltNat 5.6s ease-in-out infinite}
-.a-topo-3b .p-eyes{animation:lookNat 5.6s infinite}
-.a-topo-3b .p-paw-r{animation:pawHello 5.6s infinite}
-.a-topo-3b .p-snout{animation:snoutSniff 5.6s infinite}
-.a-topo-3b .critter-nose-tip{animation:noseTwitch2 5.6s infinite}
-.a-topo-3b .critter-eye{animation:blinkReal 5.6s infinite}
-.a-topo-4 .p-tongue{animation:tongueTease 5s infinite}
-.a-topo-4 .critter-eye{animation:squintTease 5s infinite}
-.a-topo-4 .p-body{animation:teaseTilt 5s ease-in-out infinite}
-.a-topo-4 .p-ear-l{animation:teaseEarsL 5s infinite}
-.a-topo-4 .p-ear-r{animation:teaseEarsR 5s infinite}
-.a-topo-5 .p-body{animation:danceRock 4.4s ease-in-out infinite}
-.a-topo-5 .p-ear-l{animation:danceEarL 4.4s ease-in-out infinite}
-.a-topo-5 .p-ear-r{animation:danceEarR 4.4s ease-in-out infinite}
-.a-topo-5 .p-paw-l{animation:dancePawL 4.4s ease-in-out infinite}
-.a-topo-5 .p-paw-r{animation:dancePawR 4.4s ease-in-out infinite}
-.a-topo-5 .critter-eye{animation:blinkReal 4.4s infinite}
+@keyframes tiltNat{0%{transform:rotate(0)}25%{transform:rotate(-5deg)}50%{transform:rotate(0)}75%{transform:rotate(5deg)}100%{transform:rotate(0)}}
+@keyframes lookNat{0%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(0)}75%{transform:translateX(4px)}100%{transform:translateX(0)}}
+@keyframes pawHello{0%{transform:translate(0,0) rotate(0)}20%{transform:translate(6px,-13px) rotate(28deg)}40%{transform:translate(6px,-13px) rotate(2deg)}60%{transform:translate(6px,-13px) rotate(28deg)}80%{transform:translate(6px,-13px) rotate(2deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes tongueTease{0%{transform:scaleY(0)}12%{transform:scaleY(1)}35%{transform:scaleY(.85) rotate(-5deg)}60%{transform:scaleY(1) rotate(5deg)}85%{transform:scaleY(.6)}100%{transform:scaleY(0)}}
+@keyframes squintTease{0%{transform:scaleY(1)}12%,85%{transform:scaleY(.7) translateY(.5px)}100%{transform:scaleY(1)}}
+@keyframes teaseTilt{0%{transform:rotate(0)}25%{transform:rotate(-6deg)}50%{transform:rotate(0)}75%{transform:rotate(6deg)}100%{transform:rotate(0)}}
+@keyframes teaseEarsL{0%{transform:rotate(0) scale(1)}30%,70%{transform:rotate(-12deg) scale(1.15)}100%{transform:rotate(0) scale(1)}}
+@keyframes teaseEarsR{0%{transform:rotate(0) scale(1)}30%,70%{transform:rotate(12deg) scale(1.15)}100%{transform:rotate(0) scale(1)}}
+@keyframes danceRock{0%{transform:rotate(0)}25%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}75%{transform:rotate(-5deg)}100%{transform:rotate(0)}}
+@keyframes danceEarL{0%{transform:rotate(0)}25%,75%{transform:rotate(14deg)}50%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
+@keyframes danceEarR{0%{transform:rotate(0)}25%,75%{transform:rotate(-14deg)}50%{transform:rotate(8deg)}100%{transform:rotate(0)}}
+@keyframes dancePawL{0%{transform:rotate(0)}25%,75%{transform:rotate(-18deg) translateY(-2px)}50%{transform:rotate(8deg)}100%{transform:rotate(0)}}
+@keyframes dancePawR{0%{transform:rotate(0)}25%,75%{transform:rotate(18deg) translateY(-2px)}50%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
+.a-topo-2b .p-snout{animation:snoutSniff 2.2s infinite}
+.a-topo-2b .critter-nose-tip{animation:noseTwitch2 2.2s infinite}
+.a-topo-2b .p-whisk-l{animation:whiskFlickL 2.2s infinite}
+.a-topo-2b .p-whisk-r{animation:whiskFlickR 2.2s infinite}
+.a-topo-2b .p-ear-l{animation:earTwitchL2 2.2s infinite}
+.a-topo-2b .p-ear-r{animation:earTwitchR2 2.2s infinite}
+.a-topo-2b .p-hair{animation:hairSway 1.8s ease-in-out infinite}
+.a-topo-2b .critter-eye{animation:blinkReal 2.2s infinite}
+.a-topo-3b .p-body{animation:tiltNat 2.4s ease-in-out infinite}
+.a-topo-3b .p-eyes{animation:lookNat 2.4s infinite}
+.a-topo-3b .p-paw-r{animation:pawHello 2.4s infinite}
+.a-topo-3b .p-snout{animation:snoutSniff 2.4s infinite}
+.a-topo-3b .critter-nose-tip{animation:noseTwitch2 2.4s infinite}
+.a-topo-3b .critter-eye{animation:blinkReal 2.4s infinite}
+.a-topo-4 .p-tongue{animation:tongueTease 1.6s infinite}
+.a-topo-4 .critter-eye{animation:squintTease 1.6s infinite}
+.a-topo-4 .p-body{animation:teaseTilt 1.6s ease-in-out infinite}
+.a-topo-4 .p-ear-l{animation:teaseEarsL 1.6s infinite}
+.a-topo-4 .p-ear-r{animation:teaseEarsR 1.6s infinite}
+.a-topo-5 .p-body{animation:danceRock 2.0s ease-in-out infinite}
+.a-topo-5 .p-ear-l{animation:danceEarL 2.0s ease-in-out infinite}
+.a-topo-5 .p-ear-r{animation:danceEarR 2.0s ease-in-out infinite}
+.a-topo-5 .p-paw-l{animation:dancePawL 2.0s ease-in-out infinite}
+.a-topo-5 .p-paw-r{animation:dancePawR 2.0s ease-in-out infinite}
+.a-topo-5 .critter-eye{animation:blinkReal 2.0s infinite}
+}
 
 /* ===== erizo ===== */
 @keyframes breatheBody{0%,100%{transform:scale(1,1)}50%{transform:scale(1.02,.975)}}

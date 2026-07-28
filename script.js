@@ -1911,6 +1911,7 @@
         
         hole.hp = hole.maxHp;
         renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp });
+        applyRandomIdleAnimation(hole.critterEl, kind);
 
         // Force browser reflow to guarantee CSS transition triggers (crucial in fast-spawning Horde Mode)
         const child = hole.critterEl.firstElementChild;
@@ -1934,6 +1935,7 @@
   function checkHordeClear() {
     if (hordeClearIntervalId) clearInterval(hordeClearIntervalId);
     
+    let checks = 0;
     hordeClearIntervalId = setInterval(() => {
       if (!running || paused) {
         clearInterval(hordeClearIntervalId);
@@ -1941,15 +1943,29 @@
         return;
       }
 
-      // Check if any holes are still up
-      const anyActive = holes.some(h => h.up);
-      if (!anyActive) {
+      checks++;
+
+      // Si hay hoyos derrotados o huérfanos sin HP activos, los replegamos de forma segura
+      holes.forEach(h => {
+        if (h.up && h.hp <= 0) {
+          popDown(h);
+        }
+      });
+
+      // Verificamos si algún hoyo sigue realmente activo con vida > 0
+      const anyActive = holes.some(h => h.up && h.hp > 0);
+
+      // Si no queda ninguno activo O si pasaron más de 3.5 segundos (12 verificaciones de 300ms) de seguridad
+      if (!anyActive || checks >= 12) {
         clearInterval(hordeClearIntervalId);
         hordeClearIntervalId = null;
+        // Limpiamos cualquier hoyo residual por seguridad
+        holes.forEach(h => popDown(h));
         resolvePhaseClear();
       }
     }, 300);
   }
+
 
   function resolvePhaseClear() {
     isHorde = false;
@@ -1990,9 +2006,15 @@
       return;
     }
 
+    // Si el hoyo ya fue golpeado/derrotado o esta en animacion de retirada, ignoramos clics adicionales
+    if (hole.hp <= 0 || hole.el.classList.contains("hit")) {
+      return;
+    }
+
     // Registramos que este hoyo fue golpeado para evitar que un nuevo topo reaparezca de inmediato en el mismo hoyo
     lastHitHoleIndex = index;
     lastHitTime = Date.now();
+
 
     const kind = hole.kind;
     const now = Date.now();
