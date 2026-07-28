@@ -1841,7 +1841,7 @@
         hole.el.classList.remove("fork-up");
 
         // Set HPs & state matching normal spawn loop rules
-        if (kind === "mole" || kind === "erizo" || kind === "disguise_mole" || kind === "bubble_heart" || kind === "bubble_hammer") {
+        if (kind === "mole" || kind === "erizo" || kind === "disguise_mole" || kind === "bubble_heart" || kind === "bubble_hammer" || (kind && kind.startsWith("bonus_"))) {
           hole.maxHp = 1;
         } else if (kind === "helmet_mole") {
           hole.maxHp = 2;
@@ -1853,7 +1853,10 @@
           hole.maxHp = 1;
           hole.state = { forkUp: true }; // Starts with fork raised
           hole.el.classList.add("fork-up");
+        } else {
+          hole.maxHp = 1;
         }
+
         
         hole.hp = hole.maxHp;
         renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp });
@@ -1930,11 +1933,18 @@
     const index = Number(e.currentTarget.dataset.index);
     const hole = holes[index];
     
-    if (!hole.up || hole.hp <= 0) {
-      // Missed click: resets combo
+    // Si el hoyo no esta arriba, es un fallo de punteria (resetea combo)
+    if (!hole.up) {
       resetCombo();
       return;
     }
+
+    // Si el hoyo ya fue golpeado/derrotado pero sigue completando su animacion visual,
+    // ignoramos clics secundarios limpiamente sin castigar el combo
+    if (hole.hp <= 0 || hole.el.classList.contains("hit")) {
+      return;
+    }
+
 
     const kind = hole.kind;
     const now = Date.now();
@@ -2067,10 +2077,10 @@
         showToast(`¡Combo x${multiplier}!`);
       }
 
-      // Retardo para apreciar la animacion de brinco de los finalistas (600ms)
+      // Retardo para apreciar la animacion de brinco y recompensa de los finalistas (850ms)
       setTimeout(() => {
         popDown(hole);
-      }, 600);
+      }, 850);
     }
 
 
@@ -2116,11 +2126,12 @@
         showToast(`¡Combo x${multiplier}!`);
       }
 
-      // Retardo breve para apreciar expresion de golpe en topos normales (150ms)
+      // Retardo para apreciar expresion de golpe en topos normales (250ms)
       setTimeout(() => {
         popDown(hole);
-      }, 150);
+      }, 250);
     }
+
 
     if (navigator.vibrate) navigator.vibrate(20);
     updateHud();
