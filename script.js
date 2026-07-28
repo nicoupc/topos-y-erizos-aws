@@ -9,40 +9,40 @@
   const SFX_MUTE_KEY = "toposyerizos-sfx-muted";
   const MAX_HIGHSCORES = 5;
 
-  // Dificulty Configurations (Balanced & Playable)
+  // Dificulty Configurations (Relaxed, Accessible & Balanced)
   const DIFFICULTIES = {
     facil: {
       maxActive: 2,       // Maximum active moles at one time (prevents chaos)
-      startMinUp: 3000,   // Min duration mole stays up at Phase 1 (ms)
-      startMaxUp: 3800,   // Max duration mole stays up at Phase 1 (ms)
-      endMinUp: 1800,     // Min duration mole stays up at Phase 10 (ms)
-      endMaxUp: 2500,     // Max duration mole stays up at Phase 10 (ms)
-      spawnDelayMin: 1200,// Min delay between spawns (ms)
-      spawnDelayMax: 2000,// Max delay between spawns (ms)
-      erizoChance: 0.16,   // Chance to spawn Erizos
+      startMinUp: 3400,   // Min duration mole stays up at Phase 1 (ms)
+      startMaxUp: 4200,   // Max duration mole stays up at Phase 1 (ms)
+      endMinUp: 2400,     // Min duration mole stays up at Phase 10 (ms)
+      endMaxUp: 3000,     // Max duration mole stays up at Phase 10 (ms)
+      spawnDelayMin: 1400,// Min delay between spawns (ms)
+      spawnDelayMax: 2200,// Max delay between spawns (ms)
+      erizoChance: 0.14,   // Chance to spawn Erizos
     },
     normal: {
       maxActive: 3,
-      startMinUp: 2600,   // Slower start for relaxed, friendly play
-      startMaxUp: 3400,
-      endMinUp: 1700,     // Smooth, comfortable speed at Phase 10 (no frenetic acceleration!)
-      endMaxUp: 2300,
-      spawnDelayMin: 900,
-      spawnDelayMax: 1600,
-      erizoChance: 0.20,
+      startMinUp: 2800,   // Slower, relaxed start for friendly play
+      startMaxUp: 3600,
+      endMinUp: 2100,     // Generous, comfortable up-time at Phase 10 (2.1s - 2.7s)
+      endMaxUp: 2700,
+      spawnDelayMin: 1100,
+      spawnDelayMax: 1800,
+      erizoChance: 0.18,
     },
-
     dificil: {
       maxActive: 4,
-      startMinUp: 1800,
-      startMaxUp: 2500,
-      endMinUp: 900,
-      endMaxUp: 1400,
-      spawnDelayMin: 500,
-      spawnDelayMax: 1000,
-      erizoChance: 0.28,
+      startMinUp: 2200,
+      startMaxUp: 2900,
+      endMinUp: 1400,
+      endMaxUp: 1900,
+      spawnDelayMin: 700,
+      spawnDelayMax: 1300,
+      erizoChance: 0.25,
     }
   };
+
 
   // Phase configurations (10 Phases progression)
   const PHASE_GOALS = [5, 6, 7, 8, 9, 10, 11, 12, 13, 15]; // hits needed per phase
@@ -2832,9 +2832,11 @@
     menuCritterKind = kind;
     menuCritterIsHit = false;
     
-    // Render SVG
+    // Render SVG & assign idle micro-animation
     const state = kind === "fork_mole" ? { forkUp: true } : { hp: 1 };
     renderCritter(menuCritter, kind, state);
+    applyRandomIdleAnimation(menuCritter, kind);
+
     
     // Clean up classes
     menuMoleContainer.classList.remove("hit");
