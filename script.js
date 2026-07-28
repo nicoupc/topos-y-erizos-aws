@@ -1614,7 +1614,7 @@
     const myToken = hole.upToken;
     
     // Set HPs
-    if (kind === "mole" || kind === "erizo" || kind === "disguise_mole" || kind === "bubble_heart" || kind === "bubble_hammer") {
+    if (kind === "mole" || kind === "erizo" || kind === "disguise_mole" || kind === "bubble_heart" || kind === "bubble_hammer" || (kind && kind.startsWith("bonus_"))) {
       hole.maxHp = 1;
     } else if (kind === "helmet_mole") {
       hole.maxHp = 2;
@@ -1626,8 +1626,11 @@
       hole.maxHp = 1;
       hole.state = { forkUp: true }; // Starts with fork raised
       hole.el.classList.add("fork-up");
+    } else {
+      hole.maxHp = 1;
     }
     hole.hp = hole.maxHp;
+
 
     // Render initial SVG (desde cache: se parsea una vez y luego se clona)
     renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp });
