@@ -2019,12 +2019,37 @@
       executeMegaHammer();
     }
     else if (kind && kind.startsWith("bonus_")) {
-      // Bonus Character Defeat: Awards high points (+100, +200, +300, +500)
+      // Bonus Character Defeat (Entrega Finalistas): Animacion de brinco, corazones/estrellas y texto verde +PUNTOS
       const basePoints = BONUS_SCORES[kind] || 100;
       const pointsGained = basePoints * multiplier;
       score += pointsGained;
-      showScorePop(hole, `+${pointsGained}`, "#ffd700");
-      showBurst(hole, ["✨", "⭐", "🎉"]);
+
+      // 1. Animacion de brinco elastico (fCollectJump)
+      const bonusNode = hole.critterEl.querySelector(".bonus");
+      if (bonusNode) {
+        bonusNode.classList.remove("collect");
+        void bonusNode.offsetWidth; // Reflow para reiniciar animacion
+        bonusNode.classList.add("collect");
+      }
+
+      // 2. Ráfaga de Corazones y Estrellas Voladoras (fHeartFly)
+      const burst = document.createElement("div");
+      burst.className = "bonus-reward-burst on";
+      burst.innerHTML = `<span class="rh">♥</span><span class="rh">✦</span><span class="rh">✦</span><span class="rh">♥</span><span class="rh">★</span><span class="rh">★</span>`;
+      hole.el.appendChild(burst);
+
+      // 3. Texto verde flotante con el puntaje (+100, +200, +300) (fPlusFloat)
+      const plusFloat = document.createElement("div");
+      plusFloat.className = "bonus-plus-float on";
+      plusFloat.textContent = `+${pointsGained}`;
+      hole.el.appendChild(plusFloat);
+
+      // Limpieza de efectos despues de la animacion
+      setTimeout(() => {
+        burst.remove();
+        plusFloat.remove();
+      }, 1000);
+
       playSFX("victory_chime");
 
       if (!isHorde) {
@@ -2042,6 +2067,7 @@
         showToast(`¡Combo x${multiplier}!`);
       }
     }
+
 
     else {
       // Standard Mole defeat
