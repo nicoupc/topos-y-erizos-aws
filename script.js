@@ -2912,27 +2912,11 @@
     });
   }
 
-  function buildFencePosts() {
-    const postsEl = document.getElementById("fencePosts");
-    if (!postsEl) return;
-    postsEl.innerHTML = "";
-
-    const poste = `<svg viewBox="0 0 44 140" width="100%" height="100%" preserveAspectRatio="none"><defs><linearGradient id="pstWoodGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d69854"/><stop offset="35%" stop-color="#b87838"/><stop offset="100%" stop-color="#8c5022"/></linearGradient></defs><path d="M4 32 L4 138 L40 138 L40 32 L22 8 Z" fill="url(#pstWoodGrad)" stroke="#4a2711" stroke-width="4.5" stroke-linejoin="round"/><path d="M12 42 L32 42" stroke="rgba(255,255,255,0.4)" stroke-width="3.5" stroke-linecap="round"/><circle cx="22" cy="58" r="3.5" fill="#4a2711"/><circle cx="22" cy="102" r="3.5" fill="#4a2711"/></svg>`;
-    for (let i = 0; i < 28; i++) {
-      const d = document.createElement("div");
-      d.className = "post";
-      d.innerHTML = poste;
-      postsEl.appendChild(d);
-    }
-  }
-
-
-
   // Initialization
   injectHelpGraphics();
   buildBoard();
   loadSettings();
-  buildFencePosts();
+  updateMainHighscoreLabel();
   renderProfileUI();
   fetchLeaderboard();
   syncLocalRecordWithServer();

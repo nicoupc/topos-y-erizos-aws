@@ -126,58 +126,6 @@ body {
   to { transform: translateX(115vw); }
 }
 
-/* NUEVA CERCA DE MADERA VECTORIAL DE ALTA FIDELIDAD */
-.fence {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 40%;
-  height: 140px;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.rail {
-  position: absolute;
-  left: -20px;
-  right: -20px;
-  height: 22px;
-  border-radius: 12px;
-  background: linear-gradient(180deg, #c08242 0%, #aa6b2c 50%, #8a5020 100%);
-  border: 4.5px solid var(--wood-dark);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
-  z-index: 1;
-}
-
-.rail.r1 { bottom: 82px; }
-.rail.r2 { bottom: 34px; }
-
-.posts {
-  position: absolute;
-  left: -5px;
-  right: -5px;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  z-index: 2; /* Los postes van por DELANTE de los rieles */
-  padding: 0;
-}
-
-
-.post {
-  width: 44px;
-  height: 140px;
-  flex-shrink: 0;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
-}
-
-.post:nth-child(even) {
-  transform: translateY(-6px);
-}
-
-
 .bg-forest {
   position: absolute;
   bottom: 60%;
@@ -188,6 +136,20 @@ body {
   justify-content: space-between;
   padding: 0 4%;
   z-index: 2;
+}
+
+.bg-fence {
+  position: absolute;
+  bottom: calc(60% - 4px);
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect x="0" y="22" width="40" height="4" fill="%235a3212"/><rect x="0" y="10" width="40" height="4" fill="%235a3212"/><path d="M4 4 L14 4 L14 40 L4 40 Z" fill="%23aa6b2c" stroke="%235a3212" stroke-width="1.5"/><polygon points="4,4 9,0 14,4" fill="%23aa6b2c" stroke="%235a3212" stroke-width="1.5"/><path d="M24 4 L34 4 L34 40 L24 40 Z" fill="%23925c27" stroke="%235a3212" stroke-width="1.5"/><polygon points="24,4 29,0 34,4" fill="%23925c27" stroke="%235a3212" stroke-width="1.5"/></svg>');
+  background-repeat: repeat-x;
+  background-size: auto 40px;
+  background-position: bottom left;
+  opacity: 0.85;
+  z-index: 1;
 }
 
 .bg-flowers {
@@ -202,8 +164,6 @@ body {
   z-index: 1;
   pointer-events: none;
 }
-
-
 
 .bg-tree {
   width: 140px;
