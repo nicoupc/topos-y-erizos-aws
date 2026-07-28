@@ -1459,8 +1459,8 @@ body {
   left: 22px;
   top: 32px;
   z-index: 100;
-  width: 310px;
-  max-width: min(94vw, 310px);
+  width: 360px;
+  max-width: min(94vw, 360px);
   background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood) 100%);
   border: 5px solid var(--wood-dark) !important;
   border-radius: 20px;
@@ -1488,7 +1488,7 @@ body {
 .floating-profile-badge .cuerdas {
   display: flex;
   justify-content: space-between;
-  width: 170px;
+  width: 200px;
   position: absolute;
   top: -34px;
   left: 50%;
@@ -1531,8 +1531,8 @@ body {
 }
 
 .floating-profile-badge .profile-avatar-badge {
-  width: 74px;
-  height: 74px;
+  width: 86px;
+  height: 86px;
   border-radius: 50%;
   background: var(--parch);
   border: 4px solid var(--wood-dark);
@@ -1564,7 +1564,7 @@ body {
 }
 
 .floating-profile-badge .profile-name {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 900;
   color: #ffffff;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
@@ -1580,13 +1580,14 @@ body {
   gap: 6px;
   background: rgba(0, 0, 0, 0.28);
   border-radius: 99px;
-  padding: 3px 14px;
+  padding: 3px 12px;
   font-weight: 900;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #ffffff;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
   align-self: flex-start;
 }
+
 
 .floating-profile-badge .profile-highscore b {
   color: #ffd043;
