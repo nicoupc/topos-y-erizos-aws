@@ -209,11 +209,9 @@
   let playerAvatar = localStorage.getItem("toposyerizos-playeravatar") || "mole";
   const AVATAR_LIST = [
     "mole", "erizo", "helmet_mole", "disguise_mole", "bucket_mole", "fork_mole", "zombie_mole",
-    "bonus_peccy-3", "bonus_peccy-5",
-    "bonus_kiro-1", "bonus_kiro-3", "bonus_kiro-4", "bonus_kiro-5",
-    "bonus_cody3-1", "bonus_cody3-3", "bonus_cody3-4",
-    "bonus_s32-1", "bonus_s32-3", "bonus_s32-4"
+    "bonus_peccy-5", "bonus_kiro-1", "bonus_cody3-3", "bonus_s32-1"
   ];
+
   let selectedAvatarIndex = AVATAR_LIST.indexOf(playerAvatar);
 
 
@@ -1008,21 +1006,13 @@
   }
 
   /* ---------------------------------------------------------------------------
-     PERSONAJES BONUS (Peccy, Kiro, Cody, Balde S3)
+     PERSONAJES BONUS SELECCIONADOS (Peccy-5, Kiro-1, Cody3-3, Balde S32-1)
      --------------------------------------------------------------------------- */
   const BONUS_SCORES = {
-    "bonus_peccy-3": 100,
-    "bonus_cody3-1": 100,
-    "bonus_s32-1": 100,
     "bonus_peccy-5": 200,
-    "bonus_cody3-3": 200,
-    "bonus_s32-4": 200,
     "bonus_kiro-1": 300,
-    "bonus_kiro-4": 300,
-    "bonus_s32-3": 300,
-    "bonus_kiro-3": 500,
-    "bonus_kiro-5": 500,
-    "bonus_cody3-4": 500
+    "bonus_cody3-3": 200,
+    "bonus_s32-1": 100
   };
 
   const BONUS_KINDS = Object.keys(BONUS_SCORES);
@@ -1030,6 +1020,7 @@
   function getRandomBonusKind() {
     return BONUS_KINDS[Math.floor(Math.random() * BONUS_KINDS.length)];
   }
+
 
   /* ---------------------------------------------------------------------------
      CACHE DE PERSONAJES (SVG)
@@ -1224,9 +1215,10 @@
   function getAvatarSVG(kind) {
     if (kind && kind.startsWith("bonus_")) {
       const bonusId = kind.replace("bonus_", "");
-      if (window.BONUS && typeof window.BONUS.crear === "function") {
-        const bonusEl = window.BONUS.crear(bonusId);
-        if (bonusEl) return bonusEl.outerHTML;
+      if (window.BONUS && window.BONUS.piezas && window.BONUS.piezas[bonusId]) {
+        const p = window.BONUS.piezas[bonusId];
+        window.BONUS.estilo(bonusId);
+        return `<div class="bonus-avatar-fit ${p.clase}">${p.svg}</div>`;
       }
     }
     if (kind === "mole") return getMoleSVG("normal", "normal");
@@ -1238,6 +1230,7 @@
     if (kind === "zombie_mole") return getZombieMoleSVG({ hp: 5 });
     return getMoleSVG("normal", "normal");
   }
+
 
 
   function getLocalRecord() {
