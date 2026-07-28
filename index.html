@@ -100,17 +100,29 @@
         </button>
       </div>
       
-      <!-- 1. FLOATING PROFILE BADGE (TOP-LEFT) -->
+      <!-- 1. FLOATING PROFILE BADGE (TOP-LEFT HANGING WOODEN SIGN) -->
       <div class="floating-profile-badge" id="profileCard">
+        <!-- Hanging Ropes -->
+        <div class="cuerdas" aria-hidden="true">
+          <div class="cuerda i"></div>
+          <div class="cuerda d"></div>
+        </div>
+        <!-- Corner Nails -->
+        <div class="clavo i" aria-hidden="true"></div>
+        <div class="clavo d" aria-hidden="true"></div>
+        
         <button class="modal-close-btn" id="btnCloseProfileModal" title="Cerrar" aria-label="Cerrar">&times;</button>
+        
         <!-- View Mode -->
         <div class="profile-view-mode" id="profileViewMode">
           <div class="profile-avatar-badge" id="profileViewAvatar"></div>
           <div class="profile-info">
-            <span class="profile-name" id="profileViewName">Jugador Anónimo</span>
-            <span class="profile-highscore">Récord: <b id="profileViewRecord">0</b></span>
+            <div class="profile-name-row">
+              <span class="profile-name" id="profileViewName">Jugador Anónimo</span>
+              <button class="edit-profile-btn" id="btnEditProfile" title="Editar Perfil">✏️</button>
+            </div>
+            <span class="profile-highscore">🏆 <b id="profileViewRecord">0</b></span>
           </div>
-          <button class="edit-profile-btn" id="btnEditProfile" title="Editar Perfil">✏️</button>
         </div>
         
         <!-- Edit Mode (hidden by default) -->
@@ -126,6 +138,7 @@
           </div>
         </div>
       </div>
+
 
       <!-- 2. FLOATING RANKING BOARD (TOP-RIGHT) -->
       <div class="floating-mini-leaderboard" id="miniLeaderboardCard">

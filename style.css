@@ -1453,63 +1453,95 @@ body {
   min-height: 100dvh;
 }
 
-/* ---------- FLOATING CORNER BADGES (TOP-LEFT & TOP-RIGHT) ---------- */
+/* ---------- FLOATING CORNER BADGES (HANGING WOODEN PROFILE SIGN) ---------- */
 .floating-profile-badge {
   position: fixed;
-  left: 20px;
-  top: 20px;
+  left: 22px;
+  top: 32px;
   z-index: 100;
-  width: 340px;
-  max-width: min(94vw, 340px);
-  background: #f8edd1;
-  border: 6px solid var(--wood-dark) !important;
-  border-radius: 18px;
-  box-shadow: 
-    0 8px 0 var(--wood-dark), 
-    0 12px 20px rgba(0,0,0,0.4), 
-    inset 0 0 15px rgba(0,0,0,0.15);
-  padding: 12px 14px;
+  width: 310px;
+  max-width: min(94vw, 310px);
+  background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood) 100%);
+  border: 5px solid var(--wood-dark) !important;
+  border-radius: 20px;
+  box-shadow: 0 6px 0 var(--wood-dark), 0 12px 20px rgba(40,20,0,.35);
+  padding: 14px 16px;
   box-sizing: border-box;
   font-family: 'Fredoka', sans-serif;
-  color: #4a2d18;
+  color: #fff;
   transition: transform 0.2s ease;
+  animation: mecer 5s ease-in-out infinite;
+  transform-origin: top center;
 }
 
-.floating-profile-badge .profile-badge-title {
-  font-size: 0.85rem;
-  font-weight: 900;
-  color: #734222;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 8px;
-  border-bottom: 1.5px solid #e2d1b1;
-  padding-bottom: 4px;
-  width: 100%;
-  text-align: center;
+/* Dashed inner border stitching line */
+.floating-profile-badge::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 2px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  pointer-events: none;
 }
+
+/* Hanging Ropes */
+.floating-profile-badge .cuerdas {
+  display: flex;
+  justify-content: space-between;
+  width: 170px;
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.floating-profile-badge .cuerda {
+  width: 6px;
+  height: 36px;
+  background: repeating-linear-gradient(45deg, #c9a227 0 4px, #a67f1a 4px 8px);
+  border-left: 2px solid var(--wood-dark);
+  border-right: 2px solid var(--wood-dark);
+}
+
+.floating-profile-badge .cuerda.i { transform: rotate(6deg); }
+.floating-profile-badge .cuerda.d { transform: rotate(-6deg); }
+
+/* Corner Nails */
+.floating-profile-badge .clavo {
+  position: absolute;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wood-dark);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  z-index: 2;
+}
+.floating-profile-badge .clavo.i { left: 11px; }
+.floating-profile-badge .clavo.d { right: 11px; }
 
 .floating-profile-badge .profile-view-mode {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   position: relative;
   width: 100%;
-  padding-right: 24px;
   box-sizing: border-box;
 }
 
 .floating-profile-badge .profile-avatar-badge {
-  width: 72px;
-  height: 72px;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
-  background: #fff;
-  border: 3.5px solid var(--wood-dark);
+  background: var(--parch);
+  border: 4px solid var(--wood-dark);
+  box-shadow: 0 3px 0 var(--wood-dark);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .floating-profile-badge .profile-avatar-badge svg {
@@ -1525,39 +1557,55 @@ body {
   overflow: hidden;
 }
 
+.floating-profile-badge .profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .floating-profile-badge .profile-name {
-  font-size: clamp(0.8rem, 3.2vw, 1.08rem);
+  font-size: 1.35rem;
   font-weight: 900;
-  color: #4a2d18;
-  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 100%;
 }
 
 .floating-profile-badge .profile-highscore {
-  font-size: 0.9rem;
-  color: #7d441c;
-  font-weight: 600;
+  margin-top: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 99px;
+  padding: 3px 14px;
+  font-weight: 900;
+  font-size: 1rem;
+  color: #ffffff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  align-self: flex-start;
+}
+
+.floating-profile-badge .profile-highscore b {
+  color: #ffd043;
 }
 
 .floating-profile-badge .edit-profile-btn {
-  position: absolute;
-  top: 4px;
-  right: 4px;
   background: none;
   border: none;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  padding: 4px;
+  padding: 0;
   transition: transform 0.15s ease;
-  z-index: 5;
+  user-select: none;
 }
 
 .floating-profile-badge .edit-profile-btn:hover {
-  transform: scale(1.2);
+  transform: scale(1.25);
 }
+
 
 .floating-profile-badge .profile-edit-mode {
   display: flex;
