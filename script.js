@@ -1536,8 +1536,9 @@
       return "erizo";
     }
 
-    // High chance in test/demo mode (50%), normal chance (15%) in production mode
-    const bonusChance = TEST_HIGH_SPAWN_RATE ? 0.50 : 0.15;
+    // High chance in test/demo mode (50%), balanced bonus chance (10%) in production mode
+    const bonusChance = TEST_HIGH_SPAWN_RATE ? 0.50 : 0.10;
+
     if (Math.random() < bonusChance) {
       return getRandomBonusKind();
     }
