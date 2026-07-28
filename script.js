@@ -1063,9 +1063,10 @@
     helmet_mole:   ['a-casco-3b', 'a-casco-4', 'a-casco-5', 'a-casco-6'],
     bucket_mole:   ['a-balde-2b', 'a-balde-3b', 'a-balde-4', 'a-balde-5'],
     disguise_mole: ['a-disfraz-3b', 'a-disfraz-4', 'a-disfraz-5', 'a-disfraz-6'],
-    fork_mole:     ['a-tenedor-2b', 'a-tenedor-3b', 'a-tenedor-5'],
+    fork_mole:     [], // Mantiene la mecánica exacta de subida/bajada de tenedor (.fork-up) sin interferencias
     zombie_mole:   ['a-zombie-4', 'a-zombie-6', 'a-zombie-7']
   };
+
 
   function applyRandomIdleAnimation(critterEl, kind) {
     const list = IDLE_CLASSES[kind];
@@ -1102,12 +1103,19 @@
 
 
   function getCritterHTML(kind, state) {
+    const hp = state && state.hp != null ? state.hp : 1;
     if (window.TOPOS_SVG) {
       if (kind === "mole") return window.TOPOS_SVG.topo;
       if (kind === "erizo") return window.TOPOS_SVG.erizo;
       if (kind === "disguise_mole") return window.TOPOS_SVG.disfraz;
-      if (kind === "helmet_mole") return window.TOPOS_SVG.casco;
-      if (kind === "bucket_mole") return window.TOPOS_SVG.balde;
+      if (kind === "helmet_mole") {
+        return hp > 1 ? window.TOPOS_SVG.casco : window.TOPOS_SVG.topo; // 1st hit removes helmet!
+      }
+      if (kind === "bucket_mole") {
+        if (hp === 3) return window.TOPOS_SVG.balde;
+        if (hp === 2) return getBucketMoleSVG({ hp: 2 }); // 1st hit dents bucket
+        return window.TOPOS_SVG.topo; // 2nd hit removes bucket!
+      }
       if (kind === "fork_mole") return window.TOPOS_SVG.tenedor;
       if (kind === "zombie_mole") return window.TOPOS_SVG.zombie;
       if (kind === "bubble_heart") return window.TOPOS_SVG.corazon;
@@ -1118,6 +1126,7 @@
     if (kind === "disguise_mole") return getDisguisedMoleSVG();
     if (kind === "helmet_mole") return getHelmetMoleSVG(state);
     if (kind === "bucket_mole") return getBucketMoleSVG(state);
+
     if (kind === "fork_mole") return getForkMoleSVG(state);
     if (kind === "zombie_mole") return getZombieMoleSVG(state);
     if (kind === "bubble_heart" || kind === "bubble_hammer") return getBubblePowerupSVG(kind);

@@ -2819,18 +2819,18 @@ body {
 .a-topo-3b .p-snout{animation:snoutSniff 2.4s infinite}
 .a-topo-3b .critter-nose-tip{animation:noseTwitch2 2.4s infinite}
 .a-topo-3b .critter-eye{animation:blinkReal 2.4s infinite}
-.a-topo-4 .p-tongue{animation:tongueTease 1.6s infinite}
-.a-topo-4 .critter-eye{animation:squintTease 1.6s infinite}
-.a-topo-4 .p-body{animation:teaseTilt 1.6s ease-in-out infinite}
-.a-topo-4 .p-ear-l{animation:teaseEarsL 1.6s infinite}
-.a-topo-4 .p-ear-r{animation:teaseEarsR 1.6s infinite}
-.a-topo-5 .p-body{animation:danceRock 2.0s ease-in-out infinite}
-.a-topo-5 .p-ear-l{animation:danceEarL 2.0s ease-in-out infinite}
-.a-topo-5 .p-ear-r{animation:danceEarR 2.0s ease-in-out infinite}
-.a-topo-5 .p-paw-l{animation:dancePawL 2.0s ease-in-out infinite}
-.a-topo-5 .p-paw-r{animation:dancePawR 2.0s ease-in-out infinite}
-.a-topo-5 .critter-eye{animation:blinkReal 2.0s infinite}
-}
+.a-topo-4 .p-tongue{animation:tongueTease 2.4s infinite}
+.a-topo-4 .critter-eye{animation:squintTease 2.4s infinite}
+.a-topo-4 .p-body{animation:teaseTilt 2.4s ease-in-out infinite}
+.a-topo-4 .p-ear-l{animation:teaseEarsL 2.4s infinite}
+.a-topo-4 .p-ear-r{animation:teaseEarsR 2.4s infinite}
+.a-topo-5 .p-body{animation:danceRock 2.6s ease-in-out infinite}
+.a-topo-5 .p-ear-l{animation:danceEarL 2.6s ease-in-out infinite}
+.a-topo-5 .p-ear-r{animation:danceEarR 2.6s ease-in-out infinite}
+.a-topo-5 .p-paw-l{animation:dancePawL 2.6s ease-in-out infinite}
+.a-topo-5 .p-paw-r{animation:dancePawR 2.6s ease-in-out infinite}
+.a-topo-5 .critter-eye{animation:blinkReal 2.6s infinite}
+
 
 /* ===== erizo ===== */
 @keyframes breatheBody{0%,100%{transform:scale(1,1)}50%{transform:scale(1.02,.975)}}
