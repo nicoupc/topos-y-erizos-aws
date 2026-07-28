@@ -23,14 +23,15 @@
     },
     normal: {
       maxActive: 3,
-      startMinUp: 2500,   // Slower start for children/friendly play
-      startMaxUp: 3300,
-      endMinUp: 1300,     // Reaches standard speed at Phase 10
-      endMaxUp: 1900,
-      spawnDelayMin: 800,
-      spawnDelayMax: 1500,
-      erizoChance: 0.22,
+      startMinUp: 2600,   // Slower start for relaxed, friendly play
+      startMaxUp: 3400,
+      endMinUp: 1700,     // Smooth, comfortable speed at Phase 10 (no frenetic acceleration!)
+      endMaxUp: 2300,
+      spawnDelayMin: 900,
+      spawnDelayMax: 1600,
+      erizoChance: 0.20,
     },
+
     dificil: {
       maxActive: 4,
       startMinUp: 1800,
@@ -1536,8 +1537,9 @@
       return "erizo";
     }
 
-    // High chance in test/demo mode (50%), balanced bonus chance (10%) in production mode
-    const bonusChance = TEST_HIGH_SPAWN_RATE ? 0.50 : 0.10;
+    // High chance in test/demo mode (50%), balanced bonus chance (13%) in production mode
+    const bonusChance = TEST_HIGH_SPAWN_RATE ? 0.50 : 0.13;
+
 
     if (Math.random() < bonusChance) {
       return getRandomBonusKind();
