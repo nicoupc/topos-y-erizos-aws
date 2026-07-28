@@ -2066,6 +2066,11 @@
       if (multiplier > prevMult) {
         showToast(`¡Combo x${multiplier}!`);
       }
+
+      // Retardo para apreciar la animacion de brinco de los finalistas (600ms)
+      setTimeout(() => {
+        popDown(hole);
+      }, 600);
     }
 
 
@@ -2110,13 +2115,17 @@
         playSFX("victory_chime");
         showToast(`¡Combo x${multiplier}!`);
       }
+
+      // Retardo breve para apreciar expresion de golpe en topos normales (150ms)
+      setTimeout(() => {
+        popDown(hole);
+      }, 150);
     }
 
     if (navigator.vibrate) navigator.vibrate(20);
-
-    popDown(hole);
     updateHud();
   }
+
 
   function executeMegaHammer() {
     playSFX("horde_warning"); // heavy sound
