@@ -1306,8 +1306,9 @@
       const entry = entries[i];
       if (!entry || !entry.name) continue;
       const namePart = entry.name;
-      const avatarPart = entry.avatar || "mole";
       const isMe = entry.id ? (entry.id === playerId) : (namePart.trim().toLowerCase() === playerName.trim().toLowerCase());
+      const avatarPart = isMe ? playerAvatar : (entry.avatar || "mole");
+
       
       const row = document.createElement("div");
       row.className = `leaderboard-row rank-${i+1} ${isMe ? "my-row" : ""}`;

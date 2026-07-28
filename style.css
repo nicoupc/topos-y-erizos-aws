@@ -2695,12 +2695,16 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #fffbf2 0%, #fcecd6 100%);
 }
 
 .bonus-avatar-fit svg {
-  width: 85% !important;
-  height: 85% !important;
+  width: 108% !important;
+  height: 108% !important;
+  transform: translateY(3%);
   display: block;
 }
+
 
 
