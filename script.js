@@ -1057,6 +1057,27 @@
     }
   }
 
+  const IDLE_CLASSES = {
+    mole:          ['a-topo-2b', 'a-topo-3b', 'a-topo-4', 'a-topo-5'],
+    erizo:         ['a-erizo-2b', 'a-erizo-3b', 'a-erizo-4', 'a-erizo-5'],
+    helmet_mole:   ['a-casco-3b', 'a-casco-4', 'a-casco-5', 'a-casco-6'],
+    bucket_mole:   ['a-balde-2b', 'a-balde-3b', 'a-balde-4', 'a-balde-5'],
+    disguise_mole: ['a-disfraz-3b', 'a-disfraz-4', 'a-disfraz-5', 'a-disfraz-6'],
+    fork_mole:     ['a-tenedor-2b', 'a-tenedor-3b', 'a-tenedor-5'],
+    zombie_mole:   ['a-zombie-4', 'a-zombie-6', 'a-zombie-7']
+  };
+
+  function applyRandomIdleAnimation(critterEl, kind) {
+    const list = IDLE_CLASSES[kind];
+    if (list && list.length > 0) {
+      const pick = list[Math.floor(Math.random() * list.length)];
+      critterEl.className = 'critter ' + pick;
+    } else {
+      critterEl.className = 'critter';
+    }
+  }
+
+
   /* Pre-genera (y pre-parsea) los personajes mientras el jugador esta en el menu,
      en tiempo libre del navegador. Asi el primer golpe ya encuentra todo listo. */
   function prewarmCritterCache() {
@@ -1081,6 +1102,17 @@
 
 
   function getCritterHTML(kind, state) {
+    if (window.TOPOS_SVG) {
+      if (kind === "mole") return window.TOPOS_SVG.topo;
+      if (kind === "erizo") return window.TOPOS_SVG.erizo;
+      if (kind === "disguise_mole") return window.TOPOS_SVG.disfraz;
+      if (kind === "helmet_mole") return window.TOPOS_SVG.casco;
+      if (kind === "bucket_mole") return window.TOPOS_SVG.balde;
+      if (kind === "fork_mole") return window.TOPOS_SVG.tenedor;
+      if (kind === "zombie_mole") return window.TOPOS_SVG.zombie;
+      if (kind === "bubble_heart") return window.TOPOS_SVG.corazon;
+      if (kind === "bubble_hammer") return window.TOPOS_SVG.martillo;
+    }
     if (kind === "mole") return getMoleSVG("normal", "sparkle");
     if (kind === "erizo") return getErizoSVG();
     if (kind === "disguise_mole") return getDisguisedMoleSVG();
@@ -1091,6 +1123,7 @@
     if (kind === "bubble_heart" || kind === "bubble_hammer") return getBubblePowerupSVG(kind);
     return "";
   }
+
 
   // Inject graphics inside Help Page
   function injectHelpGraphics() {
@@ -1650,6 +1683,8 @@
 
     // Render initial SVG (desde cache: se parsea una vez y luego se clona)
     renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp });
+    applyRandomIdleAnimation(hole.critterEl, kind);
+
 
     // Make ~80% of critters blink almost immediately on spawn
     // by using a negative animation-delay to jump into the blink keyframes
