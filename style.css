@@ -126,47 +126,57 @@ body {
   to { transform: translateX(115vw); }
 }
 
-/* NUEVA CERCA DE MADERA VECTORIAL (de demo-juego.html) */
+/* NUEVA CERCA DE MADERA VECTORIAL DE ALTA FIDELIDAD */
 .fence {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 41%;
-  height: 118px;
+  bottom: 40%;
+  height: 140px;
   z-index: 1;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .rail {
   position: absolute;
-  left: 0;
-  right: 0;
-  height: 13px;
-  border-radius: 6px;
-  background: #aa6b2c;
-  border: 4px solid var(--wood-dark);
+  left: -20px;
+  right: -20px;
+  height: 22px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #c08242 0%, #aa6b2c 50%, #8a5020 100%);
+  border: 4.5px solid var(--wood-dark);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+  z-index: 1;
 }
 
-.rail.r1 { bottom: 72px; }
-.rail.r2 { bottom: 32px; }
+.rail.r1 { bottom: 82px; }
+.rail.r2 { bottom: 34px; }
 
 .posts {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: -5px;
+  right: -5px;
   bottom: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 3%;
+  align-items: flex-end;
+  z-index: 2; /* Los postes van por DELANTE de los rieles */
+  padding: 0;
 }
 
+
 .post {
-  width: 28px;
+  width: 44px;
+  height: 140px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
 }
 
 .post:nth-child(even) {
-  transform: translateY(-10px);
+  transform: translateY(-6px);
 }
+
 
 .bg-forest {
   position: absolute;
