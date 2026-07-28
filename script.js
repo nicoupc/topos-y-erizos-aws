@@ -13,35 +13,36 @@
   const DIFFICULTIES = {
     facil: {
       maxActive: 2,       // Maximum active moles at one time (prevents chaos)
-      startMinUp: 3400,   // Min duration mole stays up at Phase 1 (ms)
-      startMaxUp: 4200,   // Max duration mole stays up at Phase 1 (ms)
-      endMinUp: 2400,     // Min duration mole stays up at Phase 10 (ms)
-      endMaxUp: 3000,     // Max duration mole stays up at Phase 10 (ms)
-      spawnDelayMin: 1400,// Min delay between spawns (ms)
-      spawnDelayMax: 2200,// Max delay between spawns (ms)
-      erizoChance: 0.14,   // Chance to spawn Erizos
+      startMinUp: 3600,   // Min duration mole stays up at Phase 1 (ms)
+      startMaxUp: 4400,   // Max duration mole stays up at Phase 1 (ms)
+      endMinUp: 2800,     // Min duration mole stays up at Phase 10 (ms)
+      endMaxUp: 3400,     // Max duration mole stays up at Phase 10 (ms)
+      spawnDelayMin: 1500,// Min delay between spawns (ms)
+      spawnDelayMax: 2400,// Max delay between spawns (ms)
+      erizoChance: 0.12,   // Chance to spawn Erizos
     },
     normal: {
       maxActive: 3,
-      startMinUp: 2800,   // Slower, relaxed start for friendly play
-      startMaxUp: 3600,
-      endMinUp: 2100,     // Generous, comfortable up-time at Phase 10 (2.1s - 2.7s)
-      endMaxUp: 2700,
-      spawnDelayMin: 1100,
-      spawnDelayMax: 1800,
-      erizoChance: 0.18,
+      startMinUp: 3200,   // Slower, super relaxed start
+      startMaxUp: 4000,
+      endMinUp: 2400,     // Generous 2.4s - 3.0s up-time even at Phase 10!
+      endMaxUp: 3000,
+      spawnDelayMin: 1200,
+      spawnDelayMax: 2000,
+      erizoChance: 0.16,
     },
     dificil: {
       maxActive: 4,
-      startMinUp: 2200,
-      startMaxUp: 2900,
-      endMinUp: 1400,
-      endMaxUp: 1900,
-      spawnDelayMin: 700,
-      spawnDelayMax: 1300,
-      erizoChance: 0.25,
+      startMinUp: 2400,
+      startMaxUp: 3100,
+      endMinUp: 1600,
+      endMaxUp: 2200,
+      spawnDelayMin: 800,
+      spawnDelayMax: 1400,
+      erizoChance: 0.22,
     }
   };
+
 
 
   // Phase configurations (10 Phases progression)
@@ -1070,14 +1071,17 @@
 
 
   function applyRandomIdleAnimation(critterEl, kind) {
+    const isMenu = critterEl && critterEl.id === "menuCritter";
+    const baseClass = isMenu ? "menu-critter critter" : "critter";
     const list = IDLE_CLASSES[kind];
     if (list && list.length > 0) {
       const pick = list[Math.floor(Math.random() * list.length)];
-      critterEl.className = 'critter ' + pick;
+      critterEl.className = baseClass + " " + pick;
     } else {
-      critterEl.className = 'critter';
+      critterEl.className = baseClass;
     }
   }
+
 
 
   /* Pre-genera (y pre-parsea) los personajes mientras el jugador esta en el menu,
