@@ -1453,63 +1453,95 @@ body {
   min-height: 100dvh;
 }
 
-/* ---------- FLOATING CORNER BADGES (TOP-LEFT & TOP-RIGHT) ---------- */
+/* ---------- FLOATING CORNER BADGES (HANGING WOODEN PROFILE SIGN) ---------- */
 .floating-profile-badge {
   position: fixed;
-  left: 20px;
-  top: 20px;
+  left: 22px;
+  top: 32px;
   z-index: 100;
-  width: 340px;
-  max-width: min(94vw, 340px);
-  background: #f8edd1;
-  border: 6px solid var(--wood-dark) !important;
-  border-radius: 18px;
-  box-shadow: 
-    0 8px 0 var(--wood-dark), 
-    0 12px 20px rgba(0,0,0,0.4), 
-    inset 0 0 15px rgba(0,0,0,0.15);
-  padding: 12px 14px;
+  width: 360px;
+  max-width: min(94vw, 360px);
+  background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood) 100%);
+  border: 5px solid var(--wood-dark) !important;
+  border-radius: 20px;
+  box-shadow: 0 6px 0 var(--wood-dark), 0 12px 20px rgba(40,20,0,.35);
+  padding: 14px 16px;
   box-sizing: border-box;
   font-family: 'Fredoka', sans-serif;
-  color: #4a2d18;
+  color: #fff;
   transition: transform 0.2s ease;
+  animation: mecer 5s ease-in-out infinite;
+  transform-origin: top center;
 }
 
-.floating-profile-badge .profile-badge-title {
-  font-size: 0.85rem;
-  font-weight: 900;
-  color: #734222;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 8px;
-  border-bottom: 1.5px solid #e2d1b1;
-  padding-bottom: 4px;
-  width: 100%;
-  text-align: center;
+/* Dashed inner border stitching line */
+.floating-profile-badge::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 2px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  pointer-events: none;
 }
+
+/* Hanging Ropes */
+.floating-profile-badge .cuerdas {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.floating-profile-badge .cuerda {
+  width: 6px;
+  height: 36px;
+  background: repeating-linear-gradient(45deg, #c9a227 0 4px, #a67f1a 4px 8px);
+  border-left: 2px solid var(--wood-dark);
+  border-right: 2px solid var(--wood-dark);
+}
+
+.floating-profile-badge .cuerda.i { transform: rotate(6deg); }
+.floating-profile-badge .cuerda.d { transform: rotate(-6deg); }
+
+/* Corner Nails */
+.floating-profile-badge .clavo {
+  position: absolute;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wood-dark);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  z-index: 2;
+}
+.floating-profile-badge .clavo.i { left: 11px; }
+.floating-profile-badge .clavo.d { right: 11px; }
 
 .floating-profile-badge .profile-view-mode {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   position: relative;
   width: 100%;
-  padding-right: 24px;
   box-sizing: border-box;
 }
 
 .floating-profile-badge .profile-avatar-badge {
-  width: 72px;
-  height: 72px;
+  width: 86px;
+  height: 86px;
   border-radius: 50%;
-  background: #fff;
-  border: 3.5px solid var(--wood-dark);
+  background: var(--parch);
+  border: 4px solid var(--wood-dark);
+  box-shadow: 0 3px 0 var(--wood-dark);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .floating-profile-badge .profile-avatar-badge svg {
@@ -1525,39 +1557,56 @@ body {
   overflow: hidden;
 }
 
+.floating-profile-badge .profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .floating-profile-badge .profile-name {
-  font-size: clamp(0.8rem, 3.2vw, 1.08rem);
+  font-size: 1.15rem;
   font-weight: 900;
-  color: #4a2d18;
-  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 100%;
 }
 
 .floating-profile-badge .profile-highscore {
-  font-size: 0.9rem;
-  color: #7d441c;
-  font-weight: 600;
+  margin-top: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 99px;
+  padding: 3px 12px;
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: #ffffff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  align-self: flex-start;
+}
+
+
+.floating-profile-badge .profile-highscore b {
+  color: #ffd043;
 }
 
 .floating-profile-badge .edit-profile-btn {
-  position: absolute;
-  top: 4px;
-  right: 4px;
   background: none;
   border: none;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  padding: 4px;
+  padding: 0;
   transition: transform 0.15s ease;
-  z-index: 5;
+  user-select: none;
 }
 
 .floating-profile-badge .edit-profile-btn:hover {
-  transform: scale(1.2);
+  transform: scale(1.25);
 }
+
 
 .floating-profile-badge .profile-edit-mode {
   display: flex;
@@ -1609,25 +1658,81 @@ body {
 
 .floating-mini-leaderboard {
   position: fixed;
-  right: 20px;
-  top: 20px;
+  right: 22px;
+  top: 32px;
   z-index: 100;
   width: 390px;
-  max-width: min(95vw, 390px);
+  max-width: min(94vw, 390px);
   max-height: calc(100vh - 50px);
-  overflow-y: auto;
-  background: #f8edd1;
-  border: 6px solid var(--wood-dark);
-  border-radius: 18px;
-  box-shadow: 
-    0 8px 0 var(--wood-dark), 
-    0 12px 20px rgba(0,0,0,0.4), 
-    inset 0 0 15px rgba(0,0,0,0.15);
+  background: linear-gradient(180deg, var(--wood-light) 0%, var(--wood) 100%);
+  border: 5px solid var(--wood-dark) !important;
+  border-radius: 20px;
+  box-shadow: 0 6px 0 var(--wood-dark), 0 12px 20px rgba(40,20,0,.35);
   padding: 14px 16px;
   box-sizing: border-box;
   font-family: 'Fredoka', sans-serif;
-  color: #4a2d18;
+  color: #fff;
+  animation: mecer 5s ease-in-out infinite alternate;
+  transform-origin: top center;
 }
+
+/* Dashed inner border stitching line */
+.floating-mini-leaderboard::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 2px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+/* Hanging Ropes */
+.floating-mini-leaderboard .cuerdas {
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.floating-mini-leaderboard .cuerda {
+  width: 6px;
+  height: 36px;
+  background: repeating-linear-gradient(45deg, #c9a227 0 4px, #a67f1a 4px 8px);
+  border-left: 2px solid var(--wood-dark);
+  border-right: 2px solid var(--wood-dark);
+}
+
+.floating-mini-leaderboard .cuerda.i { transform: rotate(-6deg); }
+.floating-mini-leaderboard .cuerda.d { transform: rotate(6deg); }
+
+/* Corner Nails */
+.floating-mini-leaderboard .clavo {
+  position: absolute;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wood-dark);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  z-index: 2;
+}
+.floating-mini-leaderboard .clavo.i { left: 11px; }
+.floating-mini-leaderboard .clavo.d { right: 11px; }
+
+.mini-leaderboard-title {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 900;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
 
 .mini-leaderboard-container-wrapper {
   display: flex;
@@ -1665,13 +1770,15 @@ body {
 }
 
 .mini-leaderboard-list-container {
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 12px;
-  padding: 8px;
-  border: 2px dashed #b1794b;
+  background: #fff8ea;
+  border-radius: 14px;
+  padding: 10px 12px;
+  border: 2.5px dashed #b1794b;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
 }
+
 
 .mini-leaderboard-list {
   display: flex;
@@ -2026,12 +2133,13 @@ body {
   display: grid;
   grid-template-columns: 42px 1fr 58px;
   column-gap: 8px;
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-size: 0.78rem;
+  font-weight: 900;
   color: #7d441c;
+  text-shadow: none;
   text-transform: uppercase;
-  padding-bottom: 4px;
-  border-bottom: 2px solid #b1794b;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed #b1794b;
   margin-bottom: 6px;
 }
 
@@ -2046,22 +2154,10 @@ body {
 .leaderboard-list {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   overflow-y: auto;
   flex-grow: 1;
   padding-right: 2px;
-}
-
-.leaderboard-list::-webkit-scrollbar {
-  width: 6px;
-}
-.leaderboard-list::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.05);
-  border-radius: 10px;
-}
-.leaderboard-list::-webkit-scrollbar-thumb {
-  background: var(--wood-medium);
-  border-radius: 10px;
 }
 
 .leaderboard-row {
@@ -2070,62 +2166,70 @@ body {
   column-gap: 8px;
   align-items: center;
   padding: 6px 8px;
-  background: rgba(255, 255, 255, 0.35);
+  background: transparent;
   border-radius: 10px;
-  border-bottom: 1px solid rgba(0,0,0,0.04);
+  box-shadow: none;
   box-sizing: border-box;
   width: 100%;
 }
 
+
 .leaderboard-row.my-row {
-  background: rgba(255, 235, 59, 0.28);
-  border: 1.5px solid #ffcc00;
+  background: #fff59d !important;
+  border: 3px solid #f57f17 !important;
 }
 
 .leaderboard-rank {
-  font-size: 0.85rem;
+  font-size: 1.05rem;
   font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   position: relative;
+  color: var(--wood-dark) !important;
 }
 
-.leaderboard-rank.rank-1 { background: #ffd700; color: #5c3b00; box-shadow: 0 2px 0 #cc9a00; }
-.leaderboard-rank.rank-2 { background: #c0c0c0; color: #3d3d3d; box-shadow: 0 2px 0 #999; }
-.leaderboard-rank.rank-3 { background: #cd7f32; color: #4e2908; box-shadow: 0 2px 0 #964f1c; }
+.leaderboard-rank.rank-1 { background: #ffd700; color: #5c3b00 !important; box-shadow: 0 2px 0 #cc9a00; }
+.leaderboard-rank.rank-2 { background: #c0c0c0; color: #3d3d3d !important; box-shadow: 0 2px 0 #999; }
+.leaderboard-rank.rank-3 { background: #cd7f32; color: #4e2908 !important; box-shadow: 0 2px 0 #964f1c; }
+
 
 .leaderboard-player {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   min-width: 0;
 }
 
 .leaderboard-player-avatar {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: #fff;
-  border: 1.5px solid var(--wood-medium);
+  background: var(--parch);
+  border: 2px solid var(--wood-dark);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
+  box-shadow: 0 1.5px 0 var(--wood-dark);
 }
 
-.leaderboard-player-avatar svg {
+.leaderboard-player-avatar svg,
+.leaderboard-player-avatar img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
 .leaderboard-player-name {
-  font-weight: 600;
-  font-size: clamp(0.78rem, 2.3vw, 0.9rem);
+
+  font-weight: 900 !important;
+  font-size: 0.92rem;
+  color: var(--wood-dark) !important;
   letter-spacing: -0.01em;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2135,12 +2239,13 @@ body {
 }
 
 .leaderboard-score {
-  font-weight: 900;
+  font-weight: 900 !important;
   text-align: right;
-  color: #4a2d18;
-  font-size: 0.92rem;
+  color: var(--wood-dark) !important;
+  font-size: 0.95rem;
   white-space: nowrap;
 }
+
 
 #leaderboardClose {
   display: block;
@@ -2663,3 +2768,367 @@ body {
     will-change: auto;
   }
 }
+
+/* ==========================================================================
+   PERSONAJES BONUS (Peccy, Kiro, Cody, Balde S3)
+   ========================================================================== */
+.bonus {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-4%);
+  filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.25));
+  pointer-events: auto;
+}
+
+.bonus svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.bonus-pausado * {
+  animation-play-state: paused !important;
+}
+
+/* Enmascaramiento de Avatares Bonus dentro de las insignias circulares */
+.bonus-avatar-fit {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #fffbf2 0%, #fcecd6 100%);
+}
+
+.bonus-avatar-fit svg {
+  width: 108% !important;
+  height: 108% !important;
+  transform: translateY(3%);
+  display: block;
+}
+
+/* ==========================================================================
+   ANIMACIONES DE GOLPE / RECOMPENSA DE PERSONAJES BONUS (Entrega Finalistas)
+   ========================================================================== */
+@keyframes fCollectJump {
+  0% { transform: translateY(-4%); }
+  20% { transform: translateY(1%) scale(1.1, .88); }
+  45% { transform: translateY(-24%) scale(.94, 1.1); }
+  70% { transform: translateY(-4%) scale(1.05, .96); }
+  100% { transform: translateY(-4%) scale(1); }
+}
+.bonus.collect {
+  animation: fCollectJump .7s cubic-bezier(.25, .8, .25, 1.25) !important;
+}
+
+@keyframes fHeartFly {
+  0% { opacity: 1; transform: translate(0, 0) scale(.4); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.25) rotate(12deg); }
+}
+.bonus-reward-burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+.bonus-reward-burst .rh {
+  position: absolute;
+  left: 46%;
+  top: 34%;
+  font-size: 22px;
+  color: #ff5e6c;
+  opacity: 0;
+  text-shadow: 0 2px 0 #7a1f28;
+  pointer-events: none;
+}
+.bonus-reward-burst .rh:nth-child(1) { --dx: -40px; --dy: -30px; }
+.bonus-reward-burst .rh:nth-child(2) { --dx: 38px; --dy: -26px; color: #ffbe1a; }
+.bonus-reward-burst .rh:nth-child(3) { --dx: -20px; --dy: -52px; color: #ffbe1a; }
+.bonus-reward-burst .rh:nth-child(4) { --dx: 22px; --dy: -54px; }
+.bonus-reward-burst .rh:nth-child(5) { --dx: -52px; --dy: -6px; color: #7ee0ff; }
+.bonus-reward-burst .rh:nth-child(6) { --dx: 50px; --dy: -8px; color: #7ee0ff; }
+.bonus-reward-burst.on .rh {
+  animation: fHeartFly .8s ease-out forwards;
+}
+
+@keyframes fPlusFloat {
+  0% { opacity: 0; transform: translate(-50%, 6px) scale(.5); }
+  25% { opacity: 1; transform: translate(-50%, -6px) scale(1.15); }
+  70% { opacity: 1; transform: translate(-50%, -22px) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -40px) scale(1); }
+}
+.bonus-plus-float {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translateX(-50%);
+  z-index: 11;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  color: #3ce152;
+  -webkit-text-stroke: 2.4px #14421a;
+  paint-order: stroke fill;
+  opacity: 0;
+  text-shadow: 0 3px 0 #14421a;
+  pointer-events: none;
+}
+.bonus-plus-float.on {
+  animation: fPlusFloat 1s ease-out forwards;
+}
+
+/* ============================================================
+   MICRO-ANIMACIONES DE REPOSO (IDLES) DE PERSONAJES
+   ============================================================ */
+@keyframes blinkReal{0%,38%,40.4%,72%,74.4%,77%,79.4%,100%{transform:scaleY(1)}39.2%,73.2%,78.2%{transform:scaleY(.08)}}
+@keyframes snoutSniff{0%,50%,68%,100%{transform:rotate(0) translateY(0)}54%{transform:rotate(-5deg) translateY(-1.2px)}58%{transform:rotate(-1deg) translateY(0)}62%{transform:rotate(-5deg) translateY(-1.2px)}}
+@keyframes noseTwitch2{0%,50%,68%,100%{transform:scale(1) translateX(0)}53%{transform:scale(1.22,.82) translateX(-.7px)}56%{transform:scale(.94,1.08) translateX(.5px)}59%{transform:scale(1.18,.86) translateX(-.5px)}63%{transform:scale(1) translateX(0)}}
+@keyframes whiskFlickL{0%,50%,68%,100%{transform:rotate(0)}54%,62%{transform:rotate(9deg)}58%{transform:rotate(-3deg)}}
+@keyframes whiskFlickR{0%,50%,68%,100%{transform:rotate(0)}54%,62%{transform:rotate(-9deg)}58%{transform:rotate(3deg)}}
+@keyframes earTwitchL2{0%,20%,32%,100%{transform:rotate(0)}23%{transform:rotate(-24deg)}26%{transform:rotate(9deg)}28.5%{transform:rotate(-10deg)}30.5%{transform:rotate(3deg)}}
+@keyframes earTwitchR2{0%,74%,86%,100%{transform:rotate(0)}77%{transform:rotate(24deg)}80%{transform:rotate(-9deg)}82.5%{transform:rotate(10deg)}84.5%{transform:rotate(-3deg)}}
+@keyframes hairSway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes trembleBody{0%,58%,84%,100%{transform:translateX(0)}61%{transform:translateX(-1.2px)}64%{transform:translateX(1.2px)}67%{transform:translateX(-1.2px)}70%{transform:translateX(1.2px)}73%{transform:translateX(-1px)}76%{transform:translateX(1px)}80%{transform:translateX(0)}}
+
+/* ===== topo común ===== */
+@keyframes tiltNat{0%{transform:rotate(0)}25%{transform:rotate(-5deg)}50%{transform:rotate(0)}75%{transform:rotate(5deg)}100%{transform:rotate(0)}}
+@keyframes lookNat{0%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(0)}75%{transform:translateX(4px)}100%{transform:translateX(0)}}
+@keyframes pawHello{0%{transform:translate(0,0) rotate(0)}20%{transform:translate(6px,-13px) rotate(28deg)}40%{transform:translate(6px,-13px) rotate(2deg)}60%{transform:translate(6px,-13px) rotate(28deg)}80%{transform:translate(6px,-13px) rotate(2deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes tongueTease{0%{transform:scaleY(0)}12%{transform:scaleY(1)}35%{transform:scaleY(.85) rotate(-5deg)}60%{transform:scaleY(1) rotate(5deg)}85%{transform:scaleY(.6)}100%{transform:scaleY(0)}}
+@keyframes squintTease{0%{transform:scaleY(1)}12%,85%{transform:scaleY(.7) translateY(.5px)}100%{transform:scaleY(1)}}
+@keyframes teaseTilt{0%{transform:rotate(0)}25%{transform:rotate(-6deg)}50%{transform:rotate(0)}75%{transform:rotate(6deg)}100%{transform:rotate(0)}}
+@keyframes teaseEarsL{0%{transform:rotate(0) scale(1)}30%,70%{transform:rotate(-12deg) scale(1.15)}100%{transform:rotate(0) scale(1)}}
+@keyframes teaseEarsR{0%{transform:rotate(0) scale(1)}30%,70%{transform:rotate(12deg) scale(1.15)}100%{transform:rotate(0) scale(1)}}
+@keyframes danceRock{0%{transform:rotate(0)}25%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}75%{transform:rotate(-5deg)}100%{transform:rotate(0)}}
+@keyframes danceEarL{0%{transform:rotate(0)}25%,75%{transform:rotate(14deg)}50%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
+@keyframes danceEarR{0%{transform:rotate(0)}25%,75%{transform:rotate(-14deg)}50%{transform:rotate(8deg)}100%{transform:rotate(0)}}
+@keyframes dancePawL{0%{transform:rotate(0)}25%,75%{transform:rotate(-18deg) translateY(-2px)}50%{transform:rotate(8deg)}100%{transform:rotate(0)}}
+@keyframes dancePawR{0%{transform:rotate(0)}25%,75%{transform:rotate(18deg) translateY(-2px)}50%{transform:rotate(-8deg)}100%{transform:rotate(0)}}
+.a-topo-2b .p-snout{animation:snoutSniff 2.2s infinite}
+.a-topo-2b .critter-nose-tip{animation:noseTwitch2 2.2s infinite}
+.a-topo-2b .p-whisk-l{animation:whiskFlickL 2.2s infinite}
+.a-topo-2b .p-whisk-r{animation:whiskFlickR 2.2s infinite}
+.a-topo-2b .p-ear-l{animation:earTwitchL2 2.2s infinite}
+.a-topo-2b .p-ear-r{animation:earTwitchR2 2.2s infinite}
+.a-topo-2b .p-hair{animation:hairSway 1.8s ease-in-out infinite}
+.a-topo-2b .critter-eye{animation:blinkReal 2.2s infinite}
+.a-topo-3b .p-body{animation:tiltNat 2.4s ease-in-out infinite}
+.a-topo-3b .p-eyes{animation:lookNat 2.4s infinite}
+.a-topo-3b .p-paw-r{animation:pawHello 2.4s infinite}
+.a-topo-3b .p-snout{animation:snoutSniff 2.4s infinite}
+.a-topo-3b .critter-nose-tip{animation:noseTwitch2 2.4s infinite}
+.a-topo-3b .critter-eye{animation:blinkReal 2.4s infinite}
+.a-topo-4 .p-tongue{animation:tongueTease 2.4s infinite}
+.a-topo-4 .critter-eye{animation:squintTease 2.4s infinite}
+.a-topo-4 .p-body{animation:teaseTilt 2.4s ease-in-out infinite}
+.a-topo-4 .p-ear-l{animation:teaseEarsL 2.4s infinite}
+.a-topo-4 .p-ear-r{animation:teaseEarsR 2.4s infinite}
+.a-topo-5 .p-body{animation:danceRock 2.6s ease-in-out infinite}
+.a-topo-5 .p-ear-l{animation:danceEarL 2.6s ease-in-out infinite}
+.a-topo-5 .p-ear-r{animation:danceEarR 2.6s ease-in-out infinite}
+.a-topo-5 .p-paw-l{animation:dancePawL 2.6s ease-in-out infinite}
+.a-topo-5 .p-paw-r{animation:dancePawR 2.6s ease-in-out infinite}
+.a-topo-5 .critter-eye{animation:blinkReal 2.6s infinite}
+
+
+/* ===== erizo ===== */
+@keyframes breatheBody{0%,100%{transform:scale(1,1)}50%{transform:scale(1.02,.975)}}
+@keyframes breatheSpikes{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+@keyframes noseWiggle{0%,58%,76%,100%{transform:rotate(0) translateY(0)}61%{transform:rotate(-6deg) translateY(-.8px)}64%{transform:rotate(4deg) translateY(0)}67%{transform:rotate(-5deg) translateY(-.8px)}70%{transform:rotate(3deg) translateY(0)}73%{transform:rotate(0) translateY(0)}}
+@keyframes whiskFlickEL{0%,58%,76%,100%{transform:rotate(0)}62%,70%{transform:rotate(8deg)}66%{transform:rotate(-3deg)}}
+@keyframes whiskFlickER{0%,58%,76%,100%{transform:rotate(0)}62%,70%{transform:rotate(-8deg)}66%{transform:rotate(3deg)}}
+@keyframes earTurnL{0%,30%,44%,100%{transform:rotate(0) scale(1)}34%,40%{transform:rotate(-14deg) scale(1.12)}}
+@keyframes earTurnR{0%,64%,78%,100%{transform:rotate(0) scale(1)}68%,74%{transform:rotate(14deg) scale(1.12)}}
+@keyframes shakeReal{0%,60%,88%,100%{transform:rotate(0) scale(1) translateY(0)}64%{transform:rotate(0) scale(.97,.94) translateY(1.5px)}68%{transform:rotate(-5deg) scale(1.03) translateY(0)}71%{transform:rotate(5deg) scale(1.05)}74%{transform:rotate(-4deg) scale(1.04)}77%{transform:rotate(4deg) scale(1.03)}80%{transform:rotate(-2deg) scale(1.01)}83%{transform:rotate(1deg) scale(1)}}
+@keyframes spikesShakeReal{0%,62%,86%,100%{transform:scale(1) rotate(0)}66%{transform:scale(1.02) rotate(-2deg)}68%{transform:rotate(-7deg) scale(1.09)}71%{transform:rotate(7deg) scale(1.1)}74%{transform:rotate(-6deg) scale(1.09)}77%{transform:rotate(6deg) scale(1.07)}80%{transform:rotate(-3deg) scale(1.04)}}
+@keyframes earsFlapL{0%,62%,86%,100%{transform:rotate(0)}68%,74%,80%{transform:rotate(-18deg)}71%,77%{transform:rotate(12deg)}}
+@keyframes earsFlapR{0%,62%,86%,100%{transform:rotate(0)}68%,74%,80%{transform:rotate(18deg)}71%,77%{transform:rotate(-12deg)}}
+@keyframes sniffAfter{0%,88%,98%,100%{transform:scale(1)}91%{transform:scale(1.2,.85)}94%{transform:scale(.95,1.05)}96%{transform:scale(1.15,.9)}}
+@keyframes showMidE{0%,44%,82%,100%{opacity:0}50%,76%{opacity:1}}
+@keyframes hideMidE{0%,44%,82%,100%{opacity:1}50%,76%{opacity:0}}
+@keyframes earsPerkL{0%,42%,84%,100%{transform:scale(1) rotate(0)}50%,78%{transform:scale(1.18) rotate(-8deg)}}
+@keyframes earsPerkR{0%,42%,84%,100%{transform:scale(1) rotate(0)}50%,78%{transform:scale(1.18) rotate(8deg)}}
+@keyframes bounceJoy{0%,44%,82%,100%{transform:scale(1)}50%{transform:scale(1.04,.95)}56%{transform:scale(.98,1.03)}62%{transform:scale(1.02,.98)}68%{transform:scale(1)}}
+@keyframes curlBall{0%,40%,88%,100%{transform:scale(1) translateY(0)}46%{transform:scale(.94,.88) translateY(4px)}50%,74%{transform:scale(.9,.82) translateY(7px)}80%{transform:scale(1.02,.98) translateY(-1px)}84%{transform:scale(1)}}
+@keyframes curlSpikes{0%,40%,88%,100%{transform:scale(1)}50%,74%{transform:scale(1.12)}}
+@keyframes curlEyes{0%,42%,86%,100%{transform:scaleY(1)}48%,62%{transform:scaleY(.08)}68%,74%{transform:scaleY(.45)}}
+.a-erizo-2b .p-body{animation:breatheBody 3.2s ease-in-out infinite}
+.a-erizo-2b .p-spikes{animation:breatheSpikes 3.2s ease-in-out infinite}
+.a-erizo-2b .p-snout{animation:noseWiggle 4.2s infinite}
+.a-erizo-2b .p-whisk-l{animation:whiskFlickEL 4.2s infinite}
+.a-erizo-2b .p-whisk-r{animation:whiskFlickER 4.2s infinite}
+.a-erizo-2b .p-fear-l{animation:earTurnL 5.1s infinite}
+.a-erizo-2b .p-fear-r{animation:earTurnR 5.1s infinite}
+.a-erizo-2b .critter-eye{animation:blinkReal 4.2s infinite}
+.a-erizo-3b .p-body{animation:shakeReal 4.8s infinite}
+.a-erizo-3b .p-spikes{animation:spikesShakeReal 4.8s infinite}
+.a-erizo-3b .p-fear-l{animation:earsFlapL 4.8s infinite}
+.a-erizo-3b .p-fear-r{animation:earsFlapR 4.8s infinite}
+.a-erizo-3b .erizo-nose{animation:sniffAfter 4.8s infinite}
+.a-erizo-3b .critter-eye{animation:blinkReal 4.8s infinite}
+.a-erizo-4 .p-eyes{animation:hideMidE 5.4s infinite}
+.a-erizo-4 .p-happy{animation:showMidE 5.4s infinite}
+.a-erizo-4 .p-mouth{animation:hideMidE 5.4s infinite}
+.a-erizo-4 .p-mouth-big{animation:showMidE 5.4s infinite}
+.a-erizo-4 .p-fear-l{animation:earsPerkL 5.4s infinite}
+.a-erizo-4 .p-fear-r{animation:earsPerkR 5.4s infinite}
+.a-erizo-4 .p-body{animation:bounceJoy 5.4s infinite}
+.a-erizo-5 .p-body{animation:curlBall 5.6s ease-in-out infinite}
+.a-erizo-5 .p-spikes{animation:curlSpikes 5.6s ease-in-out infinite}
+.a-erizo-5 .critter-eye{animation:curlEyes 5.6s infinite}
+/* ===== topo con casco ===== */
+@keyframes helmetCover{0%{transform:translateY(0) rotate(0)}25%,75%{transform:translateY(7px) rotate(-2deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes pawCoverL{0%{transform:translate(0,0) rotate(0)}25%,75%{transform:translate(13px,-22px) rotate(40deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes pawCoverR{0%{transform:translate(0,0) rotate(0)}25%,75%{transform:translate(-13px,-22px) rotate(-40deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes cowerBody{0%{transform:scale(1) translateY(0)}25%,75%{transform:scale(.97,.93) translateY(2px)}100%{transform:scale(1) translateY(0)}}
+@keyframes eyesShut{0%{transform:scaleY(1)}25%,75%{transform:scaleY(.12)}100%{transform:scaleY(1)}}
+@keyframes pawKnock{0%{transform:translate(0,0) rotate(0)}20%{transform:translate(-6px,-30px) rotate(-70deg)}40%{transform:translate(-6px,-26px) rotate(-62deg)}60%{transform:translate(-6px,-30px) rotate(-70deg)}80%{transform:translate(-6px,-26px) rotate(-62deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes helmetDing{0%{transform:translateY(0) rotate(0)}25%{transform:translateY(2px) rotate(-2deg)}50%{transform:translateY(0) rotate(0)}75%{transform:translateY(2px) rotate(2deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes showLate{0%{opacity:0}20%,80%{opacity:1}100%{opacity:0}}
+@keyframes hideLate{0%{opacity:1}20%,80%{opacity:0}100%{opacity:1}}
+@keyframes chestOut{0%{transform:scale(1)}30%,70%{transform:scale(1.03,1.02)}100%{transform:scale(1)}}
+@keyframes helmetSlip{0%{transform:translateY(0) rotate(0)}20%,60%{transform:translateY(10px) rotate(-3deg)}80%{transform:translateY(-2px) rotate(1deg)}100%{transform:translateY(0)}}
+@keyframes pawPushUp{0%{transform:translate(0,0) rotate(0)}25%,75%{transform:translate(-7px,-27px) rotate(-58deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes eyesUnderHelmet{0%{transform:scaleY(1)}25%,75%{transform:scaleY(.3) translateY(1px)}100%{transform:scaleY(1)}}
+@keyframes salutePaw{0%{transform:translate(0,0) rotate(0)}20%,80%{transform:translate(-8px,-30px) rotate(-78deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes saluteBody{0%{transform:scale(1) rotate(0)}25%,75%{transform:scale(1.02,1.035) rotate(1.5deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes saluteHelmet{0%{transform:rotate(0) translateY(0)}25%,75%{transform:rotate(2deg) translateY(-1px)}100%{transform:rotate(0) translateY(0)}}
+.a-casco-3b .helmet-group{animation:helmetCover 2.6s ease-in-out infinite}
+.a-casco-3b .p-paw-l{animation:pawCoverL 2.6s ease-in-out infinite}
+.a-casco-3b .p-paw-r{animation:pawCoverR 2.6s ease-in-out infinite}
+.a-casco-3b .p-body{animation:cowerBody 2.6s ease-in-out infinite}
+.a-casco-3b .critter-eye{animation:eyesShut 2.6s infinite}
+.a-casco-4 .p-paw-r{animation:pawKnock 2.4s infinite}
+.a-casco-4 .helmet-group{animation:helmetDing 2.4s infinite}
+.a-casco-4 .p-mouth-big{animation:showLate 2.4s infinite}
+.a-casco-4 .p-mouth{animation:hideLate 2.4s infinite}
+.a-casco-4 .p-body{animation:chestOut 2.4s infinite}
+.a-casco-4 .critter-eye{animation:blinkReal 2.4s infinite}
+.a-casco-5 .helmet-group{animation:helmetSlip 2.6s ease-in-out infinite}
+.a-casco-5 .critter-eye{animation:eyesUnderHelmet 2.6s infinite}
+.a-casco-5 .p-paw-r{animation:pawPushUp 2.6s ease-in-out infinite}
+.a-casco-6 .p-paw-r{animation:salutePaw 2.4s ease-in-out infinite}
+.a-casco-6 .p-body{animation:saluteBody 2.4s ease-in-out infinite}
+.a-casco-6 .helmet-group{animation:saluteHelmet 2.4s ease-in-out infinite}
+.a-casco-6 .critter-eye{animation:blinkReal 2.4s infinite}
+
+/* ===== topo con balde ===== */
+@keyframes bucketTiltReal{0%,100%{transform:rotate(-5deg)}12%{transform:rotate(-6deg)}50%{transform:rotate(5deg)}62%{transform:rotate(6deg)}}
+@keyframes bodyCounterReal{0%,100%{transform:rotate(2.5deg) translateX(1px)}50%{transform:rotate(-2.5deg) translateX(-1px)}}
+@keyframes eyesBalance{0%,100%{transform:translateX(2.5px)}50%{transform:translateX(-2.5px)}}
+@keyframes pawBalL{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(6deg)}}
+@keyframes pawBalR{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-6deg)}}
+@keyframes bucketDropReal{0%{transform:translateY(0) rotate(0)}20%,70%{transform:translateY(13px) rotate(-1.5deg)}85%{transform:translateY(-3px) rotate(2deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes cowerShy{0%{transform:scale(1)}25%,75%{transform:scale(.965,.94)}100%{transform:scale(1)}}
+@keyframes eyesPopAfter{0%{transform:translateY(0)}25%,75%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+@keyframes bucketPeek{0%{transform:rotate(0) translate(0,0)}20%,80%{transform:rotate(-13deg) translate(2px,-5px)}100%{transform:rotate(0) translate(0,0)}}
+@keyframes eyesPeekSide{0%{transform:translate(0,0)}20%,80%{transform:translate(-4px,-1px)}100%{transform:translate(0,0)}}
+@keyframes drumPawL{0%{transform:translate(0,0) rotate(0)}20%,50%,80%{transform:translate(9px,-31px) rotate(58deg)}35%,65%{transform:translate(9px,-25px) rotate(46deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes drumPawR{0%{transform:translate(0,0) rotate(0)}20%,50%,80%{transform:translate(-9px,-31px) rotate(-58deg)}35%,65%{transform:translate(-9px,-25px) rotate(-46deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes bucketDrum{0%{transform:translateY(0) rotate(0)}25%,75%{transform:translateY(1.5px) rotate(-1.3deg)}100%{transform:translateY(0) rotate(0)}}
+.a-balde-2b .bucket-group{animation:bucketTiltReal 2.6s ease-in-out infinite}
+.a-balde-2b .p-body{animation:bodyCounterReal 2.6s ease-in-out infinite}
+.a-balde-2b .p-eyes{animation:eyesBalance 2.6s ease-in-out infinite}
+.a-balde-2b .p-paw-l{animation:pawBalL 2.6s ease-in-out infinite}
+.a-balde-2b .p-paw-r{animation:pawBalR 2.6s ease-in-out infinite}
+.a-balde-3b .bucket-group{animation:bucketDropReal 2.6s infinite}
+.a-balde-3b .p-body{animation:cowerShy 2.6s ease-in-out infinite}
+.a-balde-3b .p-eyes{animation:eyesPopAfter 2.6s infinite}
+.a-balde-3b .critter-eye{animation:blinkReal 2.6s infinite}
+.a-balde-4 .bucket-group{animation:bucketPeek 2.6s ease-in-out infinite}
+.a-balde-4 .p-eyes{animation:eyesPeekSide 2.6s ease-in-out infinite}
+.a-balde-4 .critter-eye{animation:blinkReal 2.6s infinite}
+.a-balde-5 .p-paw-l{animation:drumPawL 2.4s infinite}
+.a-balde-5 .p-paw-r{animation:drumPawR 2.4s infinite}
+.a-balde-5 .bucket-group{animation:bucketDrum 2.4s infinite}
+.a-balde-5 .critter-eye{animation:blinkReal 2.4s infinite}
+
+/* ===== topo disfrazado ===== */
+@keyframes fakeEarFloat{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+@keyframes zipperSwing{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+@keyframes fakeEarSlipReal{0%{transform:rotate(0) translate(0,0)}25%,75%{transform:rotate(24deg) translate(2px,4px)}100%{transform:rotate(0) translate(0,0)}}
+@keyframes eyesDart{0%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}100%{transform:translateX(0)}}
+@keyframes eyesWide{0%{transform:scale(1)}25%,75%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes startleReal{0%{transform:translateY(0)}25%{transform:translateY(-2.5px)}50%{transform:translateY(.5px)}100%{transform:translateY(0)}}
+@keyframes eyesUp{0%{transform:translate(0,0)}25%,75%{transform:translate(0,-3px)}100%{transform:translate(0,0)}}
+@keyframes showMidD{0%{opacity:0}15%,85%{opacity:1}100%{opacity:0}}
+@keyframes hideMidD{0%{opacity:1}15%,85%{opacity:0}100%{opacity:1}}
+@keyframes noteFloat1{0%{opacity:0;transform:translate(0,0)}15%{opacity:1;transform:translate(1px,-2px)}60%{opacity:1;transform:translate(3px,-8px)}100%{opacity:0;transform:translate(5px,-14px)}}
+@keyframes noteFloat2{0%{opacity:0;transform:translate(0,0)}25%{opacity:1;transform:translate(1px,-2px)}70%{opacity:1;transform:translate(4px,-8px)}100%{opacity:0;transform:translate(6px,-15px)}}
+@keyframes headInnocent{0%{transform:rotate(0)}25%,75%{transform:rotate(-3deg)}100%{transform:rotate(0)}}
+@keyframes nervousDart{0%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}100%{transform:translateX(0)}}
+@keyframes gulpShow{0%{opacity:0}20%,80%{opacity:1}100%{opacity:0}}
+@keyframes gulpHide{0%{opacity:1}20%,80%{opacity:0}100%{opacity:1}}
+.a-disfraz-3b .erizo-ear{animation:none}
+.a-disfraz-3b .p-fear-l{animation:fakeEarFloat 2.6s ease-in-out infinite}
+.a-disfraz-3b .p-fear-r{animation:fakeEarSlipReal 2.6s infinite}
+.a-disfraz-3b .p-eyes{animation:eyesDart 2.6s infinite}
+.a-disfraz-3b .critter-eye{animation:eyesWide 2.6s infinite}
+.a-disfraz-3b .p-body{animation:startleReal 2.6s infinite}
+.a-disfraz-3b .p-zipper{animation:zipperSwing 2.6s ease-in-out infinite}
+.a-disfraz-4 .erizo-ear{animation:none}
+.a-disfraz-4 .p-fear-l{animation:fakeEarFloat 2.4s ease-in-out infinite}
+.a-disfraz-4 .p-fear-r{animation:fakeEarFloat 2.4s ease-in-out infinite reverse}
+.a-disfraz-4 .p-eyes{animation:eyesUp 2.4s infinite}
+.a-disfraz-4 .p-mouth{animation:hideMidD 2.4s infinite}
+.a-disfraz-4 .p-mouth-o{animation:showMidD 2.4s infinite}
+.a-disfraz-4 .p-note-1{animation:noteFloat1 2.4s infinite}
+.a-disfraz-4 .p-note-2{animation:noteFloat2 2.4s infinite}
+.a-disfraz-4 .p-body{animation:headInnocent 2.4s ease-in-out infinite}
+.a-disfraz-4 .p-zipper{animation:zipperSwing 2.4s ease-in-out infinite}
+.a-disfraz-5 .p-body{animation:shakeReal 2.6s infinite}
+.a-disfraz-5 .p-spikes{animation:spikesShakeReal 2.6s infinite}
+.a-disfraz-5 .erizo-ear{animation:none}
+.a-disfraz-5 .p-fear-l{animation:earsFlapL 2.6s .18s infinite}
+.a-disfraz-5 .p-fear-r{animation:earsFlapR 2.6s .3s infinite}
+.a-disfraz-5 .critter-eye{animation:blinkReal 2.6s infinite}
+.a-disfraz-6 .p-eyes{animation:nervousDart 2.4s infinite}
+.a-disfraz-6 .p-body{animation:trembleBody 2.4s infinite}
+.a-disfraz-6 .erizo-ear{animation:none}
+.a-disfraz-6 .p-fear-l{animation:fakeEarFloat 2.4s ease-in-out infinite}
+.a-disfraz-6 .p-fear-r{animation:fakeEarFloat 2.4s ease-in-out infinite reverse}
+.a-disfraz-6 .p-mouth{animation:gulpHide 2.4s infinite}
+.a-disfraz-6 .p-mouth-o{animation:gulpShow 2.4s infinite}
+.a-disfraz-6 .p-zipper{animation:zipperSwing 1.8s ease-in-out infinite}
+
+/* ===== topo con tenedor ===== */
+@keyframes forkFury{0%{transform:rotate(0) translateY(0)}20%{transform:rotate(-14deg) translateY(1px)}40%{transform:rotate(16deg) translateY(-3px)}60%{transform:rotate(-12deg) translateY(0)}80%{transform:rotate(14deg) translateY(-3px)}100%{transform:rotate(0) translateY(0)}}
+@keyframes browFuryL{0%{transform:translateY(0) rotate(0)}25%,75%{transform:translateY(1.5px) rotate(8deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes browFuryR{0%{transform:translateY(0) rotate(0)}25%,75%{transform:translateY(1.5px) rotate(-8deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes snortPuff{0%{transform:scale(1)}25%,75%{transform:scale(1.15,1.1)}100%{transform:scale(1)}}
+.a-tenedor-2b .fork-sway-inner{animation:forkFury 2.4s infinite}
+.a-tenedor-2b .p-body{animation:trembleBody 2.4s infinite}
+.a-tenedor-2b .p-brow-l{animation:browFuryL 2.4s infinite}
+.a-tenedor-2b .p-brow-r{animation:browFuryR 2.4s infinite}
+.a-tenedor-2b .p-snout{animation:snortPuff 2.4s infinite}
+
+/* ===== topo zombie ===== */
+@keyframes zombieSway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes headNod{0%{transform:rotate(0) translateY(0)}30%{transform:rotate(4deg) translateY(3px)}60%{transform:rotate(6deg) translateY(5px)}100%{transform:rotate(0) translateY(0)}}
+@keyframes jawSag{0%{transform:scaleY(.25)}25%,75%{transform:scaleY(1)}100%{transform:scaleY(.25)}}
+@keyframes flyOrbit{0%{opacity:1;transform:translate(30px,26px)}25%{transform:translate(52px,14px)}50%{transform:translate(72px,24px)}75%{transform:translate(38px,34px)}100%{opacity:1;transform:translate(30px,26px)}}
+@keyframes swatMiss{0%{transform:rotate(0) translate(0,0)}25%{transform:rotate(-55deg) translate(2px,-10px)}50%{transform:rotate(-20deg) translate(1px,-4px)}75%{transform:rotate(-60deg) translate(2px,-12px)}100%{transform:rotate(0) translate(0,0)}}
+@keyframes flyFollow{0%,100%{transform:translateX(-2px)}50%{transform:translateX(2px)}}
+@keyframes armZombL{0%,100%{transform:translate(6px,-14px) rotate(-75deg)}50%{transform:translate(6px,-10px) rotate(-62deg)}}
+@keyframes armZombR{0%,100%{transform:translate(-6px,-14px) rotate(75deg)}50%{transform:translate(-6px,-10px) rotate(62deg)}}
+.a-zombie-4 .zombie-group{animation:headNod 2.6s ease-in-out infinite}
+.a-zombie-4 .p-jaw{animation:jawSag 2.6s ease-in-out infinite}
+.a-zombie-6 .zombie-group{animation:zombieSway 2.6s ease-in-out infinite}
+.a-zombie-6 .p-fly{opacity:1;animation:flyOrbit 2.4s infinite}
+.a-zombie-6 .p-paw-r{animation:swatMiss 2.6s infinite}
+.a-zombie-6 .p-eyes{animation:flyFollow 2.4s ease-in-out infinite}
+.a-zombie-7 .zombie-group{animation:zombieSway 2.6s ease-in-out infinite}
+.a-zombie-7 .p-paw-l{animation:armZombL 2.6s ease-in-out infinite}
+.a-zombie-7 .p-paw-r{animation:armZombR 2.6s ease-in-out infinite}
+
+
+
+
+
+

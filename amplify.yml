@@ -12,5 +12,7 @@ frontend:
       - style.css
       - script.js
       - customHttp.yml
+      - personajes-bonus/**/*
   cache:
     paths: []
+

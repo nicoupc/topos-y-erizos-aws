@@ -1,7 +1,7 @@
 # 🕹️ Topos y Erizos — ¡Aplástalos!
 
-Juego arcade para navegador con **ranking global en tiempo real**, funcionando sobre
-una arquitectura *serverless* en AWS.
+Un juego para jugar en 3 minutos: sin instalar nada, sin crear una cuenta y sin
+publicidad. Tu puntaje compite al instante en un ranking mundial real.
 
 ### ▶️ Jugar ahora: **https://main.d2h64nxxh4ok2a.amplifyapp.com**
 
@@ -9,61 +9,59 @@ una arquitectura *serverless* en AWS.
 
 ## 🎮 De qué se trata
 
-Aplastá topos y esquivá erizos a lo largo de **10 fases** que se van poniendo más
-difíciles. Cada partida termina con tu puntaje compitiendo en un ranking mundial.
+Aplastá topos con el martillo y esquivá erizos a lo largo de **10 fases** que se
+van poniendo más difíciles de a poco, nunca de golpe.
 
-- **Criaturas con truco propio:** topos con casco (aguantan más golpes), disfrazados,
-  zombies, y erizos que **no** hay que golpear.
-- **Combos y power-ups** para multiplicar el puntaje.
-- **Hordas** al cierre de cada fase.
-- **Ranking global** y perfil con nombre y avatar.
-- Todo el arte y el sonido se **generan por código** (SVG + Web Audio): el juego no
-  usa ni una imagen ni un archivo de audio.
+- **Cada criatura tiene su truco:** algunos topos aguantan más golpes, otros se
+  disfrazan, y a los erizos **no** hay que pegarles.
+- **Combos:** encadená golpes seguidos y tus puntos se multiplican.
+- **Hordas:** al cerrar cada fase, todos los personajes salen juntos.
+- **Ranking mundial:** elegís tu nombre y tu personaje, sin registrarte.
+- Todo lo que ves y escuchás se dibuja y se sintetiza por código, en el momento:
+  el juego no descarga ninguna imagen ni ningún archivo de audio, por eso pesa
+  tan poco y anda bien hasta en internet lento.
 
 ---
 
-## ⚙️ Cómo funciona
+## ⚙️ Cómo funciona por detrás
 
-```
-   Jugador (navegador)
-          │  envía su puntaje
-          ▼
-   API Gateway  ──▶  Lambda  ──▶  DynamoDB
-                       │
-              valida, limpia y decide
-              si es un nuevo récord
-```
+![Diagrama de arquitectura de Topos y Erizos en AWS](docs/arquitectura.png)
 
-El juego se sirve desde **AWS Amplify**. Cuando alguien termina una partida, su puntaje
-viaja a una función **Lambda**, que es la única autorizada a escribir en la base de
-datos: ahí se validan los datos y se guarda el récord en **DynamoDB**.
+El juego corre entero en tu navegador. Lo único que viaja a la nube es tu
+puntaje final, cuando termina la partida.
 
-| Servicio | Para qué se usa |
+Pensá en la base de datos como una **libreta de récords**, y en la función
+Lambda como el **portero** que la cuida: es el único que puede escribir en
+ella. Antes de anotar nada, revisa que el puntaje tenga sentido, limpia el
+nombre del jugador, y solo actualiza el récord si el nuevo puntaje es
+mejor que el guardado.
+
+| Pieza | Para qué sirve |
 |---|---|
-| **Amplify Hosting** | Publica el juego con HTTPS |
-| **API Gateway** | Recibe las peticiones y limita el tráfico abusivo |
-| **Lambda** | Valida los datos y protege el ranking |
-| **DynamoDB** | Guarda los puntajes |
-| **CloudWatch + SNS** | Avisa si algo falla o se pone lento |
-| **AWS CDK** | Define toda la infraestructura como código |
+| **Amplify Hosting** | Publica el juego, con conexión segura (HTTPS) |
+| **API Gateway** | Recibe los puntajes y frena el tráfico abusivo |
+| **Lambda** | El portero: revisa y guarda cada puntaje |
+| **DynamoDB** | La libreta de récords |
+| **CloudWatch + SNS** | El sistema de alarma: avisa por correo si algo falla |
+| **AWS CDK** | La receta que arma toda esta nube con un solo comando |
 
 ---
 
 ## ✨ Decisiones destacadas
 
-- **El servidor no confía en el navegador.** Los nombres se limpian y los puntajes se
-  validan del lado del servidor, así que no se pueden inyectar datos maliciosos ni
-  inventar puntajes desde el cliente.
-- **Infraestructura como código.** Toda la nube está definida con AWS CDK, así que se
-  puede recrear desde cero con un comando. La plantilla se valida automáticamente con
-  `cfn-lint` y `cfn-guard` (sin errores ni alertas de seguridad).
-- **Monitoreo activo.** Alarmas de CloudWatch avisan por errores o latencia alta.
-- **Costo cero.** Toda la solución corre dentro de la capa gratuita de AWS.
+- **El servidor no le cree al navegador.** Cualquier puntaje que llega se revisa
+  y se limpia del lado del servidor, así que nadie puede escribir directo en la
+  base de datos ni mandar datos maliciosos.
+- **Todo se puede reconstruir con un comando.** La nube entera está descrita
+  como código (AWS CDK), y se valida sola contra errores y fallas de seguridad
+  antes de publicarse.
+- **Hay alguien vigilando.** Si algo falla o se pone lento, llega un aviso
+  automático por correo.
+- **Cuesta $0.** Toda la solución corre dentro de la capa gratuita de AWS.
+- **Se publica solo.** Cada cambio en la rama `main` se sube automáticamente,
+  sin pasos manuales.
 
 ---
-
-- **Despliegue continuo.** Cada cambio en la rama `main` se publica automáticamente en
-  Amplify, sin pasos manuales.
 
 ## 🚀 Cómo desplegarlo
 
@@ -75,8 +73,9 @@ npm install
 npx cdk deploy
 ```
 
-Al terminar, copiá la URL que aparece en el output (`ApiUrl`) dentro de `script.js`, y
-publicá `index.html`, `style.css` y `script.js` en Amplify Hosting.
+Al terminar, copiá la URL que aparece en el output (`ApiUrl`) dentro de
+`script.js`, y publicá `index.html`, `style.css` y `script.js` en Amplify
+Hosting.
 
 Para correr las pruebas de la infraestructura: `npm test`
 

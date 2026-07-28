@@ -9,39 +9,41 @@
   const SFX_MUTE_KEY = "toposyerizos-sfx-muted";
   const MAX_HIGHSCORES = 5;
 
-  // Dificulty Configurations (Balanced & Playable)
+  // Dificulty Configurations (Relaxed, Accessible & Balanced)
   const DIFFICULTIES = {
     facil: {
       maxActive: 2,       // Maximum active moles at one time (prevents chaos)
-      startMinUp: 3000,   // Min duration mole stays up at Phase 1 (ms)
-      startMaxUp: 3800,   // Max duration mole stays up at Phase 1 (ms)
-      endMinUp: 1800,     // Min duration mole stays up at Phase 10 (ms)
-      endMaxUp: 2500,     // Max duration mole stays up at Phase 10 (ms)
-      spawnDelayMin: 1200,// Min delay between spawns (ms)
-      spawnDelayMax: 2000,// Max delay between spawns (ms)
-      erizoChance: 0.16,   // Chance to spawn Erizos
+      startMinUp: 3600,   // Min duration mole stays up at Phase 1 (ms)
+      startMaxUp: 4400,   // Max duration mole stays up at Phase 1 (ms)
+      endMinUp: 2800,     // Min duration mole stays up at Phase 10 (ms)
+      endMaxUp: 3400,     // Max duration mole stays up at Phase 10 (ms)
+      spawnDelayMin: 1500,// Min delay between spawns (ms)
+      spawnDelayMax: 2400,// Max delay between spawns (ms)
+      erizoChance: 0.12,   // Chance to spawn Erizos
     },
     normal: {
       maxActive: 3,
-      startMinUp: 2500,   // Slower start for children/friendly play
-      startMaxUp: 3300,
-      endMinUp: 1300,     // Reaches standard speed at Phase 10
-      endMaxUp: 1900,
-      spawnDelayMin: 800,
-      spawnDelayMax: 1500,
-      erizoChance: 0.22,
+      startMinUp: 3200,   // Slower, super relaxed start
+      startMaxUp: 4000,
+      endMinUp: 2400,     // Generous 2.4s - 3.0s up-time even at Phase 10!
+      endMaxUp: 3000,
+      spawnDelayMin: 1200,
+      spawnDelayMax: 2000,
+      erizoChance: 0.16,
     },
     dificil: {
       maxActive: 4,
-      startMinUp: 1800,
-      startMaxUp: 2500,
-      endMinUp: 900,
-      endMaxUp: 1400,
-      spawnDelayMin: 500,
-      spawnDelayMax: 1000,
-      erizoChance: 0.28,
+      startMinUp: 2400,
+      startMaxUp: 3100,
+      endMinUp: 1600,
+      endMaxUp: 2200,
+      spawnDelayMin: 800,
+      spawnDelayMax: 1400,
+      erizoChance: 0.22,
     }
   };
+
+
 
   // Phase configurations (10 Phases progression)
   const PHASE_GOALS = [5, 6, 7, 8, 9, 10, 11, 12, 13, 15]; // hits needed per phase
@@ -207,8 +209,14 @@
     localStorage.setItem("toposyerizos-is-custom-name", "true");
   }
   let playerAvatar = localStorage.getItem("toposyerizos-playeravatar") || "mole";
-  const AVATAR_LIST = ["mole", "erizo", "helmet_mole", "disguise_mole", "bucket_mole", "fork_mole", "zombie_mole"];
+  const AVATAR_LIST = [
+    "mole", "erizo", "helmet_mole", "disguise_mole", "bucket_mole", "fork_mole", "zombie_mole",
+    "bonus_peccy-5", "bonus_kiro-1", "bonus_cody3-3", "bonus_s32-1"
+  ];
+
   let selectedAvatarIndex = AVATAR_LIST.indexOf(playerAvatar);
+
+
   if (selectedAvatarIndex === -1) selectedAvatarIndex = 0;
   
   let highscores = [];
@@ -1000,6 +1008,23 @@
   }
 
   /* ---------------------------------------------------------------------------
+     PERSONAJES BONUS SELECCIONADOS (Peccy-5, Kiro-1, Cody3-3, Balde S32-1)
+     --------------------------------------------------------------------------- */
+  const BONUS_SCORES = {
+    "bonus_peccy-5": 200,
+    "bonus_kiro-1": 300,
+    "bonus_cody3-3": 200,
+    "bonus_s32-1": 100
+  };
+
+  const BONUS_KINDS = Object.keys(BONUS_SCORES);
+
+  function getRandomBonusKind() {
+    return BONUS_KINDS[Math.floor(Math.random() * BONUS_KINDS.length)];
+  }
+
+
+  /* ---------------------------------------------------------------------------
      CACHE DE PERSONAJES (SVG)
      Antes: en cada aparicion se generaba el texto del SVG y el navegador tenia
      que PARSEARLO de nuevo (costoso, y crecia con cada personaje nuevo).
@@ -1014,7 +1039,18 @@
     let tpl = critterTemplateCache.get(key);
     if (!tpl) {
       tpl = document.createElement("div");
-      tpl.innerHTML = getCritterHTML(kind, state);
+      if (kind && kind.startsWith("bonus_")) {
+        const bonusId = kind.replace("bonus_", "");
+        if (window.BONUS && typeof window.BONUS.crear === "function") {
+          const bonusNode = window.BONUS.crear(bonusId);
+          if (bonusNode) tpl.appendChild(bonusNode);
+          else tpl.innerHTML = getCritterHTML(kind, state);
+        } else {
+          tpl.innerHTML = getCritterHTML(kind, state);
+        }
+      } else {
+        tpl.innerHTML = getCritterHTML(kind, state);
+      }
       critterTemplateCache.set(key, tpl);
     }
     el.textContent = "";
@@ -1022,6 +1058,31 @@
       el.appendChild(child.cloneNode(true));
     }
   }
+
+  const IDLE_CLASSES = {
+    mole:          ['a-topo-2b', 'a-topo-3b', 'a-topo-4', 'a-topo-5'],
+    erizo:         ['a-erizo-2b', 'a-erizo-3b', 'a-erizo-4', 'a-erizo-5'],
+    helmet_mole:   ['a-casco-3b', 'a-casco-4', 'a-casco-5', 'a-casco-6'],
+    bucket_mole:   ['a-balde-2b', 'a-balde-3b', 'a-balde-4', 'a-balde-5'],
+    disguise_mole: ['a-disfraz-3b', 'a-disfraz-4', 'a-disfraz-5', 'a-disfraz-6'],
+    fork_mole:     [], // Mantiene la mecánica exacta de subida/bajada de tenedor (.fork-up) sin interferencias
+    zombie_mole:   ['a-zombie-4', 'a-zombie-6', 'a-zombie-7']
+  };
+
+
+  function applyRandomIdleAnimation(critterEl, kind) {
+    const isMenu = critterEl && critterEl.id === "menuCritter";
+    const baseClass = isMenu ? "menu-critter critter" : "critter";
+    const list = IDLE_CLASSES[kind];
+    if (list && list.length > 0) {
+      const pick = list[Math.floor(Math.random() * list.length)];
+      critterEl.className = baseClass + " " + pick;
+    } else {
+      critterEl.className = baseClass;
+    }
+  }
+
+
 
   /* Pre-genera (y pre-parsea) los personajes mientras el jugador esta en el menu,
      en tiempo libre del navegador. Asi el primer golpe ya encuentra todo listo. */
@@ -1032,7 +1093,8 @@
       ["bucket_mole", 2], ["bucket_mole", 1],
       ["fork_mole", 1],
       ["zombie_mole", 2], ["zombie_mole", 1],
-      ["bubble_heart", 1], ["bubble_hammer", 1]
+      ["bubble_heart", 1], ["bubble_hammer", 1],
+      ...BONUS_KINDS.map(k => [k, 1])
     ];
     const warm = () => {
       const t0 = performance.now();
@@ -1044,17 +1106,38 @@
     else setTimeout(warm, 300);
   }
 
+
   function getCritterHTML(kind, state) {
+    const hp = state && state.hp != null ? state.hp : 1;
+    if (window.TOPOS_SVG) {
+      if (kind === "mole") return window.TOPOS_SVG.topo;
+      if (kind === "erizo") return window.TOPOS_SVG.erizo;
+      if (kind === "disguise_mole") return window.TOPOS_SVG.disfraz;
+      if (kind === "helmet_mole") {
+        return hp > 1 ? window.TOPOS_SVG.casco : window.TOPOS_SVG.topo; // 1st hit removes helmet!
+      }
+      if (kind === "bucket_mole") {
+        if (hp === 3) return window.TOPOS_SVG.balde;
+        if (hp === 2) return getBucketMoleSVG({ hp: 2 }); // 1st hit dents bucket
+        return window.TOPOS_SVG.topo; // 2nd hit removes bucket!
+      }
+      if (kind === "fork_mole") return window.TOPOS_SVG.tenedor;
+      if (kind === "zombie_mole") return window.TOPOS_SVG.zombie;
+      if (kind === "bubble_heart") return window.TOPOS_SVG.corazon;
+      if (kind === "bubble_hammer") return window.TOPOS_SVG.martillo;
+    }
     if (kind === "mole") return getMoleSVG("normal", "sparkle");
     if (kind === "erizo") return getErizoSVG();
     if (kind === "disguise_mole") return getDisguisedMoleSVG();
     if (kind === "helmet_mole") return getHelmetMoleSVG(state);
     if (kind === "bucket_mole") return getBucketMoleSVG(state);
+
     if (kind === "fork_mole") return getForkMoleSVG(state);
     if (kind === "zombie_mole") return getZombieMoleSVG(state);
     if (kind === "bubble_heart" || kind === "bubble_hammer") return getBubblePowerupSVG(kind);
     return "";
   }
+
 
   // Inject graphics inside Help Page
   function injectHelpGraphics() {
@@ -1177,6 +1260,14 @@
   }
 
   function getAvatarSVG(kind) {
+    if (kind && kind.startsWith("bonus_")) {
+      const bonusId = kind.replace("bonus_", "");
+      if (window.BONUS && window.BONUS.piezas && window.BONUS.piezas[bonusId]) {
+        const p = window.BONUS.piezas[bonusId];
+        window.BONUS.estilo(bonusId);
+        return `<div class="bonus-avatar-fit ${p.clase}">${p.svg}</div>`;
+      }
+    }
     if (kind === "mole") return getMoleSVG("normal", "normal");
     if (kind === "erizo") return getErizoSVG();
     if (kind === "helmet_mole") return getHelmetMoleSVG({ hp: 2 });
@@ -1186,6 +1277,8 @@
     if (kind === "zombie_mole") return getZombieMoleSVG({ hp: 5 });
     return getMoleSVG("normal", "normal");
   }
+
+
 
   function getLocalRecord() {
     const scores = getHighscores();
@@ -1260,8 +1353,9 @@
       const entry = entries[i];
       if (!entry || !entry.name) continue;
       const namePart = entry.name;
-      const avatarPart = entry.avatar || "mole";
       const isMe = entry.id ? (entry.id === playerId) : (namePart.trim().toLowerCase() === playerName.trim().toLowerCase());
+      const avatarPart = isMe ? playerAvatar : (entry.avatar || "mole");
+
       
       const row = document.createElement("div");
       row.className = `leaderboard-row rank-${i+1} ${isMe ? "my-row" : ""}`;
@@ -1432,6 +1526,12 @@
      GAMEPLAY SPATIAL CALCULATIONS & SELECTION
      ========================================================================= */
 
+  // Modo Producción Normal:
+  // TEST_HIGH_SPAWN_RATE = false desactiva la tasa forzada del 50% y vuelve a la
+  // frecuencia de produccion equilibrada (15%) donde aparecen como apariciones especiales.
+  const TEST_HIGH_SPAWN_RATE = false;
+
+
   function pickCritterKind(currentPhase) {
     const r = Math.random();
     const cfg = DIFFICULTIES[difficulty];
@@ -1441,7 +1541,17 @@
       return "erizo";
     }
 
+    // High chance in test/demo mode (50%), balanced bonus chance (13%) in production mode
+    const bonusChance = TEST_HIGH_SPAWN_RATE ? 0.50 : 0.13;
+
+
+    if (Math.random() < bonusChance) {
+      return getRandomBonusKind();
+    }
+
     const roll = Math.random();
+
+
 
     // Spawn ratios scale depending on the Phase (1 to 10)
     if (currentPhase === 1) {
@@ -1515,11 +1625,27 @@
     return "mole";
   }
 
+  let lastHitHoleIndex = -1;
+  let lastHitTime = 0;
+
   function randomFreeHoleIndex() {
-    const freeIndices = holes.map((h, i) => (h.up ? -1 : i)).filter(i => i !== -1);
+    const now = Date.now();
+    // Excluir hoyos que están activos (up) O que fueron golpeados hace menos de 1.2 segundos
+    let freeIndices = holes.map((h, i) => {
+      if (h.up) return -1;
+      if (i === lastHitHoleIndex && (now - lastHitTime < 1200)) return -1;
+      return i;
+    }).filter(i => i !== -1);
+
+    // Si por velocidad todos los hoyos libres estuvieran en enfriamiento, tomamos cualquier libre
+    if (freeIndices.length === 0) {
+      freeIndices = holes.map((h, i) => (h.up ? -1 : i)).filter(i => i !== -1);
+    }
+
     if (freeIndices.length === 0) return -1;
     return freeIndices[Math.floor(Math.random() * freeIndices.length)];
   }
+
 
   function popDown(hole) {
     if (!hole.up) return;
@@ -1553,7 +1679,7 @@
     const myToken = hole.upToken;
     
     // Set HPs
-    if (kind === "mole" || kind === "erizo" || kind === "disguise_mole" || kind === "bubble_heart" || kind === "bubble_hammer") {
+    if (kind === "mole" || kind === "erizo" || kind === "disguise_mole" || kind === "bubble_heart" || kind === "bubble_hammer" || (kind && kind.startsWith("bonus_"))) {
       hole.maxHp = 1;
     } else if (kind === "helmet_mole") {
       hole.maxHp = 2;
@@ -1565,11 +1691,16 @@
       hole.maxHp = 1;
       hole.state = { forkUp: true }; // Starts with fork raised
       hole.el.classList.add("fork-up");
+    } else {
+      hole.maxHp = 1;
     }
     hole.hp = hole.maxHp;
 
+
     // Render initial SVG (desde cache: se parsea una vez y luego se clona)
     renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp });
+    applyRandomIdleAnimation(hole.critterEl, kind);
+
 
     // Make ~80% of critters blink almost immediately on spawn
     // by using a negative animation-delay to jump into the blink keyframes
@@ -1777,7 +1908,7 @@
         hole.el.classList.remove("fork-up");
 
         // Set HPs & state matching normal spawn loop rules
-        if (kind === "mole" || kind === "erizo" || kind === "disguise_mole" || kind === "bubble_heart" || kind === "bubble_hammer") {
+        if (kind === "mole" || kind === "erizo" || kind === "disguise_mole" || kind === "bubble_heart" || kind === "bubble_hammer" || (kind && kind.startsWith("bonus_"))) {
           hole.maxHp = 1;
         } else if (kind === "helmet_mole") {
           hole.maxHp = 2;
@@ -1789,10 +1920,14 @@
           hole.maxHp = 1;
           hole.state = { forkUp: true }; // Starts with fork raised
           hole.el.classList.add("fork-up");
+        } else {
+          hole.maxHp = 1;
         }
+
         
         hole.hp = hole.maxHp;
         renderCritter(hole.critterEl, kind, { ...hole.state, hp: hole.hp });
+        applyRandomIdleAnimation(hole.critterEl, kind);
 
         // Force browser reflow to guarantee CSS transition triggers (crucial in fast-spawning Horde Mode)
         const child = hole.critterEl.firstElementChild;
@@ -1816,6 +1951,7 @@
   function checkHordeClear() {
     if (hordeClearIntervalId) clearInterval(hordeClearIntervalId);
     
+    let checks = 0;
     hordeClearIntervalId = setInterval(() => {
       if (!running || paused) {
         clearInterval(hordeClearIntervalId);
@@ -1823,15 +1959,29 @@
         return;
       }
 
-      // Check if any holes are still up
-      const anyActive = holes.some(h => h.up);
-      if (!anyActive) {
+      checks++;
+
+      // Si hay hoyos derrotados o huérfanos sin HP activos, los replegamos de forma segura
+      holes.forEach(h => {
+        if (h.up && h.hp <= 0) {
+          popDown(h);
+        }
+      });
+
+      // Verificamos si algún hoyo sigue realmente activo con vida > 0
+      const anyActive = holes.some(h => h.up && h.hp > 0);
+
+      // Si no queda ninguno activo O si pasaron más de 3.5 segundos (12 verificaciones de 300ms) de seguridad
+      if (!anyActive || checks >= 12) {
         clearInterval(hordeClearIntervalId);
         hordeClearIntervalId = null;
+        // Limpiamos cualquier hoyo residual por seguridad
+        holes.forEach(h => popDown(h));
         resolvePhaseClear();
       }
     }, 300);
   }
+
 
   function resolvePhaseClear() {
     isHorde = false;
@@ -1866,14 +2016,25 @@
     const index = Number(e.currentTarget.dataset.index);
     const hole = holes[index];
     
-    if (!hole.up || hole.hp <= 0) {
-      // Missed click: resets combo
+    // Si el hoyo no esta arriba, es un fallo de punteria (resetea combo)
+    if (!hole.up) {
       resetCombo();
       return;
     }
 
+    // Si el hoyo ya fue golpeado/derrotado o esta en animacion de retirada, ignoramos clics adicionales
+    if (hole.hp <= 0 || hole.el.classList.contains("hit")) {
+      return;
+    }
+
+    // Registramos que este hoyo fue golpeado para evitar que un nuevo topo reaparezca de inmediato en el mismo hoyo
+    lastHitHoleIndex = index;
+    lastHitTime = Date.now();
+
+
     const kind = hole.kind;
     const now = Date.now();
+
 
     // 1. ERIZO HIT (Obstacle)
     if (kind === "erizo") {
@@ -1954,6 +2115,63 @@
       playSFX("bubble_pop");
       executeMegaHammer();
     }
+    else if (kind && kind.startsWith("bonus_")) {
+      // Bonus Character Defeat (Entrega Finalistas): Animacion de brinco, corazones/estrellas y texto verde +PUNTOS
+      const basePoints = BONUS_SCORES[kind] || 100;
+      const pointsGained = basePoints * multiplier;
+      score += pointsGained;
+
+      // 1. Animacion de brinco elastico (fCollectJump)
+      const bonusNode = hole.critterEl.querySelector(".bonus");
+      if (bonusNode) {
+        bonusNode.classList.remove("collect");
+        void bonusNode.offsetWidth; // Reflow para reiniciar animacion
+        bonusNode.classList.add("collect");
+      }
+
+      // 2. Ráfaga de Corazones y Estrellas Voladoras (fHeartFly)
+      const burst = document.createElement("div");
+      burst.className = "bonus-reward-burst on";
+      burst.innerHTML = `<span class="rh">♥</span><span class="rh">✦</span><span class="rh">✦</span><span class="rh">♥</span><span class="rh">★</span><span class="rh">★</span>`;
+      hole.el.appendChild(burst);
+
+      // 3. Texto verde flotante con el puntaje (+100, +200, +300) (fPlusFloat)
+      const plusFloat = document.createElement("div");
+      plusFloat.className = "bonus-plus-float on";
+      plusFloat.textContent = `+${pointsGained}`;
+      hole.el.appendChild(plusFloat);
+
+      // Limpieza de efectos despues de la animacion
+      setTimeout(() => {
+        burst.remove();
+        plusFloat.remove();
+      }, 1000);
+
+      playSFX("victory_chime");
+
+      if (!isHorde) {
+        phaseHits++;
+        const target = PHASE_GOALS[phase - 1] || 15;
+        if (phaseHits >= target) {
+          startHorde();
+        }
+      }
+
+      combo++;
+      const prevMult = multiplier;
+      multiplier = Math.min(3, 1 + Math.floor(combo / 5));
+      if (multiplier > prevMult) {
+        showToast(`¡Combo x${multiplier}!`);
+      }
+
+      // Retardo para apreciar la animacion de brinco y recompensa de los finalistas (1000ms = 1 segundo completo)
+      setTimeout(() => {
+        popDown(hole);
+      }, 1000);
+    }
+
+
+
     else {
       // Standard Mole defeat
       let basePoints = 10;
@@ -1995,13 +2213,18 @@
         playSFX("victory_chime");
         showToast(`¡Combo x${multiplier}!`);
       }
+
+      // Retardo para apreciar expresion de golpe en topos normales (250ms)
+      setTimeout(() => {
+        popDown(hole);
+      }, 250);
     }
 
-    if (navigator.vibrate) navigator.vibrate(20);
 
-    popDown(hole);
+    if (navigator.vibrate) navigator.vibrate(20);
     updateHud();
   }
+
 
   function executeMegaHammer() {
     playSFX("horde_warning"); // heavy sound
@@ -2613,9 +2836,11 @@
     menuCritterKind = kind;
     menuCritterIsHit = false;
     
-    // Render SVG
+    // Render SVG & assign idle micro-animation
     const state = kind === "fork_mole" ? { forkUp: true } : { hp: 1 };
     renderCritter(menuCritter, kind, state);
+    applyRandomIdleAnimation(menuCritter, kind);
+
     
     // Clean up classes
     menuMoleContainer.classList.remove("hit");
