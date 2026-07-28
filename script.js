@@ -1521,11 +1521,11 @@
      GAMEPLAY SPATIAL CALCULATIONS & SELECTION
      ========================================================================= */
 
-  // Modo Demostracion / Pruebas de Hackaton:
-  // Si TEST_HIGH_SPAWN_RATE es true, los personajes bonus (Peccy, Kiro, Cody, S3)
-  // tienen un 50% de probabilidad de aparecer desde la Fase 1 para que
-  // sean inmediatamente visibles y apreciables en las pruebas del juego.
-  const TEST_HIGH_SPAWN_RATE = true;
+  // Modo Producción Normal:
+  // TEST_HIGH_SPAWN_RATE = false desactiva la tasa forzada del 50% y vuelve a la
+  // frecuencia de produccion equilibrada (15%) donde aparecen como apariciones especiales.
+  const TEST_HIGH_SPAWN_RATE = false;
+
 
   function pickCritterKind(currentPhase) {
     const r = Math.random();
