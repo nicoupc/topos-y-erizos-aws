@@ -2877,42 +2877,41 @@ body {
 .a-erizo-5 .p-body{animation:curlBall 5.6s ease-in-out infinite}
 .a-erizo-5 .p-spikes{animation:curlSpikes 5.6s ease-in-out infinite}
 .a-erizo-5 .critter-eye{animation:curlEyes 5.6s infinite}
-
-/* ===== topo con casco ===== */
-@keyframes helmetCover{0%,52%,88%,100%{transform:translateY(0) rotate(0)}58%,80%{transform:translateY(7px) rotate(-2deg)}}
-@keyframes pawCoverL{0%,52%,88%,100%{transform:translate(0,0) rotate(0)}58%,80%{transform:translate(13px,-22px) rotate(40deg)}}
-@keyframes pawCoverR{0%,52%,88%,100%{transform:translate(0,0) rotate(0)}58%,80%{transform:translate(-13px,-22px) rotate(-40deg)}}
-@keyframes cowerBody{0%,52%,88%,100%{transform:scale(1) translateY(0)}58%,80%{transform:scale(.97,.93) translateY(2px)}}
-@keyframes eyesShut{0%,54%,86%,100%{transform:scaleY(1)}58%,80%{transform:scaleY(.12)}}
-@keyframes pawKnock{0%,56%,86%,100%{transform:translate(0,0) rotate(0)}62%{transform:translate(-6px,-30px) rotate(-70deg)}66%{transform:translate(-6px,-26px) rotate(-62deg)}70%{transform:translate(-6px,-30px) rotate(-70deg)}74%{transform:translate(-6px,-26px) rotate(-62deg)}80%{transform:translate(0,0) rotate(0)}}
-@keyframes helmetDing{0%,62%,86%,100%{transform:translateY(0) rotate(0)}65%{transform:translateY(2px) rotate(-2deg)}68%{transform:translateY(0) rotate(0)}73%{transform:translateY(2px) rotate(2deg)}76%{transform:translateY(0) rotate(0)}}
-@keyframes showLate{0%,76%,97%,100%{opacity:0}80%,94%{opacity:1}}
-@keyframes hideLate{0%,76%,97%,100%{opacity:1}80%,94%{opacity:0}}
-@keyframes chestOut{0%,76%,96%,100%{transform:scale(1)}82%,90%{transform:scale(1.03,1.02)}}
-@keyframes helmetSlip{0%,30%,84%,100%{transform:translateY(0) rotate(0)}34%{transform:translateY(4px)}38%,58%{transform:translateY(10px) rotate(-3deg)}66%{transform:translateY(-2px) rotate(1deg)}72%{transform:translateY(1px)}78%{transform:translateY(0)}}
-@keyframes pawPushUp{0%,56%,78%,100%{transform:translate(0,0) rotate(0)}62%,70%{transform:translate(-7px,-27px) rotate(-58deg)}}
-@keyframes eyesUnderHelmet{0%,32%,66%,100%{transform:scaleY(1)}38%,60%{transform:scaleY(.3) translateY(1px)}}
-@keyframes salutePaw{0%,50%,84%,100%{transform:translate(0,0) rotate(0)}56%,76%{transform:translate(-8px,-30px) rotate(-78deg)}}
-@keyframes saluteBody{0%,48%,88%,100%{transform:scale(1) rotate(0)}54%,80%{transform:scale(1.02,1.035) rotate(1.5deg)}}
-@keyframes saluteHelmet{0%,52%,82%,100%{transform:rotate(0) translateY(0)}58%,76%{transform:rotate(2deg) translateY(-1px)}}
-.a-casco-3b .helmet-group{animation:helmetCover 5.2s ease-in-out infinite}
-.a-casco-3b .p-paw-l{animation:pawCoverL 5.2s ease-in-out infinite}
-.a-casco-3b .p-paw-r{animation:pawCoverR 5.2s ease-in-out infinite}
-.a-casco-3b .p-body{animation:cowerBody 5.2s ease-in-out infinite}
-.a-casco-3b .critter-eye{animation:eyesShut 5.2s infinite}
-.a-casco-4 .p-paw-r{animation:pawKnock 5s infinite}
-.a-casco-4 .helmet-group{animation:helmetDing 5s infinite}
-.a-casco-4 .p-mouth-big{animation:showLate 5s infinite}
-.a-casco-4 .p-mouth{animation:hideLate 5s infinite}
-.a-casco-4 .p-body{animation:chestOut 5s infinite}
-.a-casco-4 .critter-eye{animation:blinkReal 5s infinite}
-.a-casco-5 .helmet-group{animation:helmetSlip 5.4s ease-in-out infinite}
-.a-casco-5 .critter-eye{animation:eyesUnderHelmet 5.4s infinite}
-.a-casco-5 .p-paw-r{animation:pawPushUp 5.4s ease-in-out infinite}
-.a-casco-6 .p-paw-r{animation:salutePaw 5s ease-in-out infinite}
-.a-casco-6 .p-body{animation:saluteBody 5s ease-in-out infinite}
-.a-casco-6 .helmet-group{animation:saluteHelmet 5s ease-in-out infinite}
-.a-casco-6 .critter-eye{animation:blinkReal 5s infinite}
+/* ===== topo con casco ===== */
+@keyframes helmetCover{0%{transform:translateY(0) rotate(0)}25%,75%{transform:translateY(7px) rotate(-2deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes pawCoverL{0%{transform:translate(0,0) rotate(0)}25%,75%{transform:translate(13px,-22px) rotate(40deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes pawCoverR{0%{transform:translate(0,0) rotate(0)}25%,75%{transform:translate(-13px,-22px) rotate(-40deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes cowerBody{0%{transform:scale(1) translateY(0)}25%,75%{transform:scale(.97,.93) translateY(2px)}100%{transform:scale(1) translateY(0)}}
+@keyframes eyesShut{0%{transform:scaleY(1)}25%,75%{transform:scaleY(.12)}100%{transform:scaleY(1)}}
+@keyframes pawKnock{0%{transform:translate(0,0) rotate(0)}20%{transform:translate(-6px,-30px) rotate(-70deg)}40%{transform:translate(-6px,-26px) rotate(-62deg)}60%{transform:translate(-6px,-30px) rotate(-70deg)}80%{transform:translate(-6px,-26px) rotate(-62deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes helmetDing{0%{transform:translateY(0) rotate(0)}25%{transform:translateY(2px) rotate(-2deg)}50%{transform:translateY(0) rotate(0)}75%{transform:translateY(2px) rotate(2deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes showLate{0%{opacity:0}20%,80%{opacity:1}100%{opacity:0}}
+@keyframes hideLate{0%{opacity:1}20%,80%{opacity:0}100%{opacity:1}}
+@keyframes chestOut{0%{transform:scale(1)}30%,70%{transform:scale(1.03,1.02)}100%{transform:scale(1)}}
+@keyframes helmetSlip{0%{transform:translateY(0) rotate(0)}20%,60%{transform:translateY(10px) rotate(-3deg)}80%{transform:translateY(-2px) rotate(1deg)}100%{transform:translateY(0)}}
+@keyframes pawPushUp{0%{transform:translate(0,0) rotate(0)}25%,75%{transform:translate(-7px,-27px) rotate(-58deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes eyesUnderHelmet{0%{transform:scaleY(1)}25%,75%{transform:scaleY(.3) translateY(1px)}100%{transform:scaleY(1)}}
+@keyframes salutePaw{0%{transform:translate(0,0) rotate(0)}20%,80%{transform:translate(-8px,-30px) rotate(-78deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes saluteBody{0%{transform:scale(1) rotate(0)}25%,75%{transform:scale(1.02,1.035) rotate(1.5deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes saluteHelmet{0%{transform:rotate(0) translateY(0)}25%,75%{transform:rotate(2deg) translateY(-1px)}100%{transform:rotate(0) translateY(0)}}
+.a-casco-3b .helmet-group{animation:helmetCover 2.6s ease-in-out infinite}
+.a-casco-3b .p-paw-l{animation:pawCoverL 2.6s ease-in-out infinite}
+.a-casco-3b .p-paw-r{animation:pawCoverR 2.6s ease-in-out infinite}
+.a-casco-3b .p-body{animation:cowerBody 2.6s ease-in-out infinite}
+.a-casco-3b .critter-eye{animation:eyesShut 2.6s infinite}
+.a-casco-4 .p-paw-r{animation:pawKnock 2.4s infinite}
+.a-casco-4 .helmet-group{animation:helmetDing 2.4s infinite}
+.a-casco-4 .p-mouth-big{animation:showLate 2.4s infinite}
+.a-casco-4 .p-mouth{animation:hideLate 2.4s infinite}
+.a-casco-4 .p-body{animation:chestOut 2.4s infinite}
+.a-casco-4 .critter-eye{animation:blinkReal 2.4s infinite}
+.a-casco-5 .helmet-group{animation:helmetSlip 2.6s ease-in-out infinite}
+.a-casco-5 .critter-eye{animation:eyesUnderHelmet 2.6s infinite}
+.a-casco-5 .p-paw-r{animation:pawPushUp 2.6s ease-in-out infinite}
+.a-casco-6 .p-paw-r{animation:salutePaw 2.4s ease-in-out infinite}
+.a-casco-6 .p-body{animation:saluteBody 2.4s ease-in-out infinite}
+.a-casco-6 .helmet-group{animation:saluteHelmet 2.4s ease-in-out infinite}
+.a-casco-6 .critter-eye{animation:blinkReal 2.4s infinite}
 
 /* ===== topo con balde ===== */
 @keyframes bucketTiltReal{0%,100%{transform:rotate(-5deg)}12%{transform:rotate(-6deg)}50%{transform:rotate(5deg)}62%{transform:rotate(6deg)}}
@@ -2920,123 +2919,109 @@ body {
 @keyframes eyesBalance{0%,100%{transform:translateX(2.5px)}50%{transform:translateX(-2.5px)}}
 @keyframes pawBalL{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(6deg)}}
 @keyframes pawBalR{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-6deg)}}
-@keyframes bucketDropReal{0%,50%,90%,100%{transform:translateY(0) rotate(0)}55%{transform:translateY(14px) rotate(0)}57%{transform:translateY(12px) rotate(-1.5deg)}59%,74%{transform:translateY(13px) rotate(0)}80%{transform:translateY(-3px) rotate(2deg)}84%{transform:translateY(1px) rotate(0)}87%{transform:translateY(0) rotate(0)}}
-@keyframes cowerShy{0%,52%,88%,100%{transform:scale(1)}56%,78%{transform:scale(.965,.94)}}
-@keyframes eyesPopAfter{0%,78%,94%,100%{transform:translateY(0)}82%{transform:translateY(-3px)}88%{transform:translateY(-1px)}}
-@keyframes bucketPeek{0%,54%,88%,100%{transform:rotate(0) translate(0,0)}60%,78%{transform:rotate(-13deg) translate(2px,-5px)}}
-@keyframes eyesPeekSide{0%,54%,88%,100%{transform:translate(0,0)}60%,78%{transform:translate(-4px,-1px)}}
-@keyframes drumPawL{0%,48%,82%,100%{transform:translate(0,0) rotate(0)}52%,60%,68%{transform:translate(9px,-31px) rotate(58deg)}56%,64%,72%{transform:translate(9px,-25px) rotate(46deg)}78%{transform:translate(0,0) rotate(0)}}
-@keyframes drumPawR{0%,48%,82%,100%{transform:translate(0,0) rotate(0)}54%,62%,70%{transform:translate(-9px,-31px) rotate(-58deg)}58%,66%,74%{transform:translate(-9px,-25px) rotate(-46deg)}78%{transform:translate(0,0) rotate(0)}}
-@keyframes bucketDrum{0%,50%,80%,100%{transform:translateY(0) rotate(0)}53%,61%,69%{transform:translateY(1.5px) rotate(-1.3deg)}57%,65%,73%{transform:translateY(0) rotate(1.3deg)}}
-.a-balde-2b .bucket-group{animation:bucketTiltReal 2.8s ease-in-out infinite}
-.a-balde-2b .p-body{animation:bodyCounterReal 2.8s ease-in-out infinite}
-.a-balde-2b .p-eyes{animation:eyesBalance 2.8s ease-in-out infinite}
-.a-balde-2b .p-paw-l{animation:pawBalL 2.8s ease-in-out infinite}
-.a-balde-2b .p-paw-r{animation:pawBalR 2.8s ease-in-out infinite}
-.a-balde-3b .bucket-group{animation:bucketDropReal 5.6s infinite}
-.a-balde-3b .p-body{animation:cowerShy 5.6s ease-in-out infinite}
-.a-balde-3b .p-eyes{animation:eyesPopAfter 5.6s infinite}
-.a-balde-3b .critter-eye{animation:blinkReal 5.6s infinite}
-.a-balde-4 .bucket-group{animation:bucketPeek 5.4s ease-in-out infinite}
-.a-balde-4 .p-eyes{animation:eyesPeekSide 5.4s ease-in-out infinite}
-.a-balde-4 .critter-eye{animation:blinkReal 5.4s infinite}
-.a-balde-5 .p-paw-l{animation:drumPawL 4.8s infinite}
-.a-balde-5 .p-paw-r{animation:drumPawR 4.8s infinite}
-.a-balde-5 .bucket-group{animation:bucketDrum 4.8s infinite}
-.a-balde-5 .critter-eye{animation:blinkReal 4.8s infinite}
+@keyframes bucketDropReal{0%{transform:translateY(0) rotate(0)}20%,70%{transform:translateY(13px) rotate(-1.5deg)}85%{transform:translateY(-3px) rotate(2deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes cowerShy{0%{transform:scale(1)}25%,75%{transform:scale(.965,.94)}100%{transform:scale(1)}}
+@keyframes eyesPopAfter{0%{transform:translateY(0)}25%,75%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+@keyframes bucketPeek{0%{transform:rotate(0) translate(0,0)}20%,80%{transform:rotate(-13deg) translate(2px,-5px)}100%{transform:rotate(0) translate(0,0)}}
+@keyframes eyesPeekSide{0%{transform:translate(0,0)}20%,80%{transform:translate(-4px,-1px)}100%{transform:translate(0,0)}}
+@keyframes drumPawL{0%{transform:translate(0,0) rotate(0)}20%,50%,80%{transform:translate(9px,-31px) rotate(58deg)}35%,65%{transform:translate(9px,-25px) rotate(46deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes drumPawR{0%{transform:translate(0,0) rotate(0)}20%,50%,80%{transform:translate(-9px,-31px) rotate(-58deg)}35%,65%{transform:translate(-9px,-25px) rotate(-46deg)}100%{transform:translate(0,0) rotate(0)}}
+@keyframes bucketDrum{0%{transform:translateY(0) rotate(0)}25%,75%{transform:translateY(1.5px) rotate(-1.3deg)}100%{transform:translateY(0) rotate(0)}}
+.a-balde-2b .bucket-group{animation:bucketTiltReal 2.6s ease-in-out infinite}
+.a-balde-2b .p-body{animation:bodyCounterReal 2.6s ease-in-out infinite}
+.a-balde-2b .p-eyes{animation:eyesBalance 2.6s ease-in-out infinite}
+.a-balde-2b .p-paw-l{animation:pawBalL 2.6s ease-in-out infinite}
+.a-balde-2b .p-paw-r{animation:pawBalR 2.6s ease-in-out infinite}
+.a-balde-3b .bucket-group{animation:bucketDropReal 2.6s infinite}
+.a-balde-3b .p-body{animation:cowerShy 2.6s ease-in-out infinite}
+.a-balde-3b .p-eyes{animation:eyesPopAfter 2.6s infinite}
+.a-balde-3b .critter-eye{animation:blinkReal 2.6s infinite}
+.a-balde-4 .bucket-group{animation:bucketPeek 2.6s ease-in-out infinite}
+.a-balde-4 .p-eyes{animation:eyesPeekSide 2.6s ease-in-out infinite}
+.a-balde-4 .critter-eye{animation:blinkReal 2.6s infinite}
+.a-balde-5 .p-paw-l{animation:drumPawL 2.4s infinite}
+.a-balde-5 .p-paw-r{animation:drumPawR 2.4s infinite}
+.a-balde-5 .bucket-group{animation:bucketDrum 2.4s infinite}
+.a-balde-5 .critter-eye{animation:blinkReal 2.4s infinite}
 
 /* ===== topo disfrazado ===== */
 @keyframes fakeEarFloat{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
 @keyframes zipperSwing{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
-@keyframes fakeEarSlipReal{0%,50%,92%,100%{transform:rotate(0) translate(0,0)}56%{transform:rotate(14deg) translate(1px,2px)}60%,70%{transform:rotate(30deg) translate(3px,6px)}74%{transform:rotate(-10deg) translate(0,-1px)}78%{transform:rotate(6deg) translate(0,0)}82%{transform:rotate(-3deg) translate(0,0)}86%{transform:rotate(0) translate(0,0)}}
-@keyframes eyesDart{0%,58%,74%,100%{transform:translateX(0)}62%{transform:translateX(-4px)}66%{transform:translateX(4px)}70%{transform:translateX(0)}}
-@keyframes eyesWide{0%,56%,76%,100%{transform:scale(1)}60%,72%{transform:scale(1.28)}}
-@keyframes startleReal{0%,54%,64%,100%{transform:translateY(0)}57%{transform:translateY(-2.5px)}60%{transform:translateY(.5px)}}
-@keyframes eyesUp{0%,40%,86%,100%{transform:translate(0,0)}46%,80%{transform:translate(0,-3px)}}
-@keyframes showMidD{0%,42%,84%,100%{opacity:0}47%,79%{opacity:1}}
-@keyframes hideMidD{0%,42%,84%,100%{opacity:1}47%,79%{opacity:0}}
-@keyframes noteFloat1{0%,46%,84%,100%{opacity:0;transform:translate(0,0)}52%{opacity:1;transform:translate(1px,-2px)}62%{opacity:1;transform:translate(3px,-8px)}72%{opacity:0;transform:translate(5px,-14px)}}
-@keyframes noteFloat2{0%,54%,92%,100%{opacity:0;transform:translate(0,0)}60%{opacity:1;transform:translate(1px,-2px)}70%{opacity:1;transform:translate(4px,-8px)}80%{opacity:0;transform:translate(6px,-15px)}}
-@keyframes headInnocent{0%,42%,84%,100%{transform:rotate(0)}48%,78%{transform:rotate(-3deg)}}
-@keyframes nervousDart{0%,8%,90%,100%{transform:translateX(0)}14%,22%{transform:translateX(-4px)}28%,36%{transform:translateX(4px)}42%,50%{transform:translateX(-3px)}58%,66%{transform:translateX(3.5px)}74%,84%{transform:translateX(0)}}
-@keyframes gulpShow{0%,44%,58%,100%{opacity:0}47%,55%{opacity:1}}
-@keyframes gulpHide{0%,44%,58%,100%{opacity:1}47%,55%{opacity:0}}
+@keyframes fakeEarSlipReal{0%{transform:rotate(0) translate(0,0)}25%,75%{transform:rotate(24deg) translate(2px,4px)}100%{transform:rotate(0) translate(0,0)}}
+@keyframes eyesDart{0%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}100%{transform:translateX(0)}}
+@keyframes eyesWide{0%{transform:scale(1)}25%,75%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes startleReal{0%{transform:translateY(0)}25%{transform:translateY(-2.5px)}50%{transform:translateY(.5px)}100%{transform:translateY(0)}}
+@keyframes eyesUp{0%{transform:translate(0,0)}25%,75%{transform:translate(0,-3px)}100%{transform:translate(0,0)}}
+@keyframes showMidD{0%{opacity:0}15%,85%{opacity:1}100%{opacity:0}}
+@keyframes hideMidD{0%{opacity:1}15%,85%{opacity:0}100%{opacity:1}}
+@keyframes noteFloat1{0%{opacity:0;transform:translate(0,0)}15%{opacity:1;transform:translate(1px,-2px)}60%{opacity:1;transform:translate(3px,-8px)}100%{opacity:0;transform:translate(5px,-14px)}}
+@keyframes noteFloat2{0%{opacity:0;transform:translate(0,0)}25%{opacity:1;transform:translate(1px,-2px)}70%{opacity:1;transform:translate(4px,-8px)}100%{opacity:0;transform:translate(6px,-15px)}}
+@keyframes headInnocent{0%{transform:rotate(0)}25%,75%{transform:rotate(-3deg)}100%{transform:rotate(0)}}
+@keyframes nervousDart{0%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}100%{transform:translateX(0)}}
+@keyframes gulpShow{0%{opacity:0}20%,80%{opacity:1}100%{opacity:0}}
+@keyframes gulpHide{0%{opacity:1}20%,80%{opacity:0}100%{opacity:1}}
 .a-disfraz-3b .erizo-ear{animation:none}
-.a-disfraz-3b .p-fear-l{animation:fakeEarFloat 3.4s ease-in-out infinite}
-.a-disfraz-3b .p-fear-r{animation:fakeEarSlipReal 5.2s infinite}
-.a-disfraz-3b .p-eyes{animation:eyesDart 5.2s infinite}
-.a-disfraz-3b .critter-eye{animation:eyesWide 5.2s infinite}
-.a-disfraz-3b .p-body{animation:startleReal 5.2s infinite}
+.a-disfraz-3b .p-fear-l{animation:fakeEarFloat 2.6s ease-in-out infinite}
+.a-disfraz-3b .p-fear-r{animation:fakeEarSlipReal 2.6s infinite}
+.a-disfraz-3b .p-eyes{animation:eyesDart 2.6s infinite}
+.a-disfraz-3b .critter-eye{animation:eyesWide 2.6s infinite}
+.a-disfraz-3b .p-body{animation:startleReal 2.6s infinite}
 .a-disfraz-3b .p-zipper{animation:zipperSwing 2.6s ease-in-out infinite}
 .a-disfraz-4 .erizo-ear{animation:none}
-.a-disfraz-4 .p-fear-l{animation:fakeEarFloat 3.4s ease-in-out infinite}
-.a-disfraz-4 .p-fear-r{animation:fakeEarFloat 3.4s ease-in-out infinite reverse}
-.a-disfraz-4 .p-eyes{animation:eyesUp 4.8s infinite}
-.a-disfraz-4 .p-mouth{animation:hideMidD 4.8s infinite}
-.a-disfraz-4 .p-mouth-o{animation:showMidD 4.8s infinite}
-.a-disfraz-4 .p-note-1{animation:noteFloat1 4.8s infinite}
-.a-disfraz-4 .p-note-2{animation:noteFloat2 4.8s infinite}
-.a-disfraz-4 .p-body{animation:headInnocent 4.8s ease-in-out infinite}
-.a-disfraz-4 .p-zipper{animation:zipperSwing 3.2s ease-in-out infinite}
-.a-disfraz-5 .p-body{animation:shakeReal 5.2s infinite}
-.a-disfraz-5 .p-spikes{animation:spikesShakeReal 5.2s infinite}
+.a-disfraz-4 .p-fear-l{animation:fakeEarFloat 2.4s ease-in-out infinite}
+.a-disfraz-4 .p-fear-r{animation:fakeEarFloat 2.4s ease-in-out infinite reverse}
+.a-disfraz-4 .p-eyes{animation:eyesUp 2.4s infinite}
+.a-disfraz-4 .p-mouth{animation:hideMidD 2.4s infinite}
+.a-disfraz-4 .p-mouth-o{animation:showMidD 2.4s infinite}
+.a-disfraz-4 .p-note-1{animation:noteFloat1 2.4s infinite}
+.a-disfraz-4 .p-note-2{animation:noteFloat2 2.4s infinite}
+.a-disfraz-4 .p-body{animation:headInnocent 2.4s ease-in-out infinite}
+.a-disfraz-4 .p-zipper{animation:zipperSwing 2.4s ease-in-out infinite}
+.a-disfraz-5 .p-body{animation:shakeReal 2.6s infinite}
+.a-disfraz-5 .p-spikes{animation:spikesShakeReal 2.6s infinite}
 .a-disfraz-5 .erizo-ear{animation:none}
-.a-disfraz-5 .p-fear-l{animation:earsFlapL 5.2s .18s infinite}
-.a-disfraz-5 .p-fear-r{animation:earsFlapR 5.2s .3s infinite}
-.a-disfraz-5 .critter-eye{animation:blinkReal 5.2s infinite}
-.a-disfraz-6 .p-eyes{animation:nervousDart 5s infinite}
-.a-disfraz-6 .p-body{animation:trembleBody 5s infinite}
+.a-disfraz-5 .p-fear-l{animation:earsFlapL 2.6s .18s infinite}
+.a-disfraz-5 .p-fear-r{animation:earsFlapR 2.6s .3s infinite}
+.a-disfraz-5 .critter-eye{animation:blinkReal 2.6s infinite}
+.a-disfraz-6 .p-eyes{animation:nervousDart 2.4s infinite}
+.a-disfraz-6 .p-body{animation:trembleBody 2.4s infinite}
 .a-disfraz-6 .erizo-ear{animation:none}
-.a-disfraz-6 .p-fear-l{animation:fakeEarFloat 2.6s ease-in-out infinite}
-.a-disfraz-6 .p-fear-r{animation:fakeEarFloat 2.6s ease-in-out infinite reverse}
-.a-disfraz-6 .p-mouth{animation:gulpHide 5s infinite}
-.a-disfraz-6 .p-mouth-o{animation:gulpShow 5s infinite}
+.a-disfraz-6 .p-fear-l{animation:fakeEarFloat 2.4s ease-in-out infinite}
+.a-disfraz-6 .p-fear-r{animation:fakeEarFloat 2.4s ease-in-out infinite reverse}
+.a-disfraz-6 .p-mouth{animation:gulpHide 2.4s infinite}
+.a-disfraz-6 .p-mouth-o{animation:gulpShow 2.4s infinite}
 .a-disfraz-6 .p-zipper{animation:zipperSwing 1.8s ease-in-out infinite}
 
 /* ===== topo con tenedor ===== */
-@keyframes forkFury{0%,56%,90%,100%{transform:rotate(0) translateY(0)}60%{transform:rotate(-14deg) translateY(1px)}64%{transform:rotate(16deg) translateY(-3px)}67%{transform:rotate(-12deg) translateY(0)}70%{transform:rotate(14deg) translateY(-3px)}73%{transform:rotate(-10deg) translateY(0)}76%{transform:rotate(10deg) translateY(-2px)}79%{transform:rotate(-6deg) translateY(0)}82%{transform:rotate(4deg) translateY(0)}86%{transform:rotate(0) translateY(0)}}
-@keyframes browFuryL{0%,56%,88%,100%{transform:translateY(0) rotate(0)}62%,82%{transform:translateY(1.5px) rotate(8deg)}}
-@keyframes browFuryR{0%,56%,88%,100%{transform:translateY(0) rotate(0)}62%,82%{transform:translateY(1.5px) rotate(-8deg)}}
-@keyframes snortPuff{0%,56%,80%,100%{transform:scale(1)}60%,66%,72%{transform:scale(1.15,1.1)}63%,69%{transform:scale(.95,1)}}
-@keyframes forkJabReal{0%,58%,90%,100%{transform:translate(0,0) rotate(0)}62%{transform:translate(-2px,4px) rotate(-8deg)}66%{transform:translate(5px,-13px) rotate(10deg)}69%{transform:translate(1px,-1px) rotate(2deg)}73%{transform:translate(-2px,4px) rotate(-8deg)}77%{transform:translate(5px,-13px) rotate(10deg)}81%{transform:translate(0,0) rotate(0)}}
-@keyframes lungeReal{0%,58%,90%,100%{transform:translateY(0) rotate(0) scale(1)}62%,73%{transform:translateY(1px) rotate(2deg) scale(.99,.98)}66%,77%{transform:translateY(-3px) rotate(-2.5deg) scale(1,1.02)}}
-@keyframes showMidT{0%,58%,84%,100%{opacity:0}62%,80%{opacity:1}}
-@keyframes hideMidT{0%,58%,84%,100%{opacity:1}62%,80%{opacity:0}}
-@keyframes forkGuard{0%,40%,86%,100%{transform:rotate(0) translate(0,0)}46%{transform:rotate(28deg) translate(7px,-7px)}50%,76%{transform:rotate(24deg) translate(6px,-6px)}82%{transform:rotate(-4deg)}}
-@keyframes leanGuard{0%,40%,86%,100%{transform:rotate(0) translateX(0)}46%,78%{transform:rotate(4deg) translateX(2px)}}
-.a-tenedor-2b .fork-sway-inner{animation:forkFury 4.4s infinite}
-.a-tenedor-2b .p-body{animation:trembleBody 4.4s infinite}
-.a-tenedor-2b .p-brow-l{animation:browFuryL 4.4s infinite}
-.a-tenedor-2b .p-brow-r{animation:browFuryR 4.4s infinite}
-.a-tenedor-2b .p-snout{animation:snortPuff 4.4s infinite}
-.a-tenedor-3b .fork-sway-inner{animation:forkJabReal 4.6s infinite}
-.a-tenedor-3b .p-body{animation:lungeReal 4.6s infinite}
-.a-tenedor-3b .p-mouth{animation:hideMidT 4.6s infinite}
-.a-tenedor-3b .p-mouth-big{animation:showMidT 4.6s infinite}
-.a-tenedor-5 .fork-sway-inner{animation:forkGuard 5.2s ease-in-out infinite}
-.a-tenedor-5 .p-body{animation:leanGuard 5.2s ease-in-out infinite}
-.a-tenedor-5 .p-brow-l{animation:browFuryL 5.2s infinite}
-.a-tenedor-5 .p-brow-r{animation:browFuryR 5.2s infinite}
-.a-tenedor-5 .critter-eye{animation:blinkReal 5.2s infinite}
+@keyframes forkFury{0%{transform:rotate(0) translateY(0)}20%{transform:rotate(-14deg) translateY(1px)}40%{transform:rotate(16deg) translateY(-3px)}60%{transform:rotate(-12deg) translateY(0)}80%{transform:rotate(14deg) translateY(-3px)}100%{transform:rotate(0) translateY(0)}}
+@keyframes browFuryL{0%{transform:translateY(0) rotate(0)}25%,75%{transform:translateY(1.5px) rotate(8deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes browFuryR{0%{transform:translateY(0) rotate(0)}25%,75%{transform:translateY(1.5px) rotate(-8deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes snortPuff{0%{transform:scale(1)}25%,75%{transform:scale(1.15,1.1)}100%{transform:scale(1)}}
+.a-tenedor-2b .fork-sway-inner{animation:forkFury 2.4s infinite}
+.a-tenedor-2b .p-body{animation:trembleBody 2.4s infinite}
+.a-tenedor-2b .p-brow-l{animation:browFuryL 2.4s infinite}
+.a-tenedor-2b .p-brow-r{animation:browFuryR 2.4s infinite}
+.a-tenedor-2b .p-snout{animation:snortPuff 2.4s infinite}
 
 /* ===== topo zombie ===== */
 @keyframes zombieSway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
-@keyframes headNod{0%,65%,100%{transform:rotate(0) translateY(0)}30%{transform:rotate(4deg) translateY(3px)}45%{transform:rotate(6deg) translateY(5px)}52%{transform:rotate(6.5deg) translateY(6px)}56%{transform:rotate(-3deg) translateY(-2px)}60%{transform:rotate(2deg) translateY(1px)}}
-@keyframes jawSag{0%,60%,100%{transform:scaleY(.25)}20%,50%{transform:scaleY(1)}56%{transform:scaleY(.1)}}
-@keyframes flyOrbit{0%{opacity:1;transform:translate(30px,26px)}15%{transform:translate(52px,14px)}30%{transform:translate(72px,24px)}45%{transform:translate(60px,38px)}60%{transform:translate(38px,34px)}75%{transform:translate(26px,20px)}90%{transform:translate(46px,12px)}100%{opacity:1;transform:translate(30px,26px)}}
-@keyframes swatMiss{0%,40%,70%,100%{transform:rotate(0) translate(0,0)}48%{transform:rotate(-55deg) translate(2px,-10px)}54%{transform:rotate(-20deg) translate(1px,-4px)}60%{transform:rotate(-60deg) translate(2px,-12px)}66%{transform:rotate(0) translate(0,0)}}
+@keyframes headNod{0%{transform:rotate(0) translateY(0)}30%{transform:rotate(4deg) translateY(3px)}60%{transform:rotate(6deg) translateY(5px)}100%{transform:rotate(0) translateY(0)}}
+@keyframes jawSag{0%{transform:scaleY(.25)}25%,75%{transform:scaleY(1)}100%{transform:scaleY(.25)}}
+@keyframes flyOrbit{0%{opacity:1;transform:translate(30px,26px)}25%{transform:translate(52px,14px)}50%{transform:translate(72px,24px)}75%{transform:translate(38px,34px)}100%{opacity:1;transform:translate(30px,26px)}}
+@keyframes swatMiss{0%{transform:rotate(0) translate(0,0)}25%{transform:rotate(-55deg) translate(2px,-10px)}50%{transform:rotate(-20deg) translate(1px,-4px)}75%{transform:rotate(-60deg) translate(2px,-12px)}100%{transform:rotate(0) translate(0,0)}}
 @keyframes flyFollow{0%,100%{transform:translateX(-2px)}50%{transform:translateX(2px)}}
 @keyframes armZombL{0%,100%{transform:translate(6px,-14px) rotate(-75deg)}50%{transform:translate(6px,-10px) rotate(-62deg)}}
 @keyframes armZombR{0%,100%{transform:translate(-6px,-14px) rotate(75deg)}50%{transform:translate(-6px,-10px) rotate(62deg)}}
-.a-zombie-4 .zombie-group{animation:headNod 5.6s ease-in-out infinite}
-.a-zombie-4 .p-jaw{animation:jawSag 5.6s ease-in-out infinite}
-.a-zombie-6 .zombie-group{animation:zombieSway 3.6s ease-in-out infinite}
-.a-zombie-6 .p-fly{opacity:1;animation:flyOrbit 2.6s infinite}
-.a-zombie-6 .p-paw-r{animation:swatMiss 5.2s infinite}
-.a-zombie-6 .p-eyes{animation:flyFollow 2.6s ease-in-out infinite}
-.a-zombie-7 .zombie-group{animation:zombieSway 2.8s ease-in-out infinite}
-.a-zombie-7 .p-paw-l{animation:armZombL 2.8s ease-in-out infinite}
-.a-zombie-7 .p-paw-r{animation:armZombR 2.8s ease-in-out infinite}
+.a-zombie-4 .zombie-group{animation:headNod 2.6s ease-in-out infinite}
+.a-zombie-4 .p-jaw{animation:jawSag 2.6s ease-in-out infinite}
+.a-zombie-6 .zombie-group{animation:zombieSway 2.6s ease-in-out infinite}
+.a-zombie-6 .p-fly{opacity:1;animation:flyOrbit 2.4s infinite}
+.a-zombie-6 .p-paw-r{animation:swatMiss 2.6s infinite}
+.a-zombie-6 .p-eyes{animation:flyFollow 2.4s ease-in-out infinite}
+.a-zombie-7 .zombie-group{animation:zombieSway 2.6s ease-in-out infinite}
+.a-zombie-7 .p-paw-l{animation:armZombL 2.6s ease-in-out infinite}
+.a-zombie-7 .p-paw-r{animation:armZombR 2.6s ease-in-out infinite}
+
 
 
 
