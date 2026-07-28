@@ -1576,11 +1576,27 @@
     return "mole";
   }
 
+  let lastHitHoleIndex = -1;
+  let lastHitTime = 0;
+
   function randomFreeHoleIndex() {
-    const freeIndices = holes.map((h, i) => (h.up ? -1 : i)).filter(i => i !== -1);
+    const now = Date.now();
+    // Excluir hoyos que están activos (up) O que fueron golpeados hace menos de 1.2 segundos
+    let freeIndices = holes.map((h, i) => {
+      if (h.up) return -1;
+      if (i === lastHitHoleIndex && (now - lastHitTime < 1200)) return -1;
+      return i;
+    }).filter(i => i !== -1);
+
+    // Si por velocidad todos los hoyos libres estuvieran en enfriamiento, tomamos cualquier libre
+    if (freeIndices.length === 0) {
+      freeIndices = holes.map((h, i) => (h.up ? -1 : i)).filter(i => i !== -1);
+    }
+
     if (freeIndices.length === 0) return -1;
     return freeIndices[Math.floor(Math.random() * freeIndices.length)];
   }
+
 
   function popDown(hole) {
     if (!hole.up) return;
@@ -1939,15 +1955,13 @@
       return;
     }
 
-    // Si el hoyo ya fue golpeado/derrotado pero sigue completando su animacion visual,
-    // ignoramos clics secundarios limpiamente sin castigar el combo
-    if (hole.hp <= 0 || hole.el.classList.contains("hit")) {
-      return;
-    }
-
+    // Registramos que este hoyo fue golpeado para evitar que un nuevo topo reaparezca de inmediato en el mismo hoyo
+    lastHitHoleIndex = index;
+    lastHitTime = Date.now();
 
     const kind = hole.kind;
     const now = Date.now();
+
 
     // 1. ERIZO HIT (Obstacle)
     if (kind === "erizo") {
@@ -2077,11 +2091,12 @@
         showToast(`¡Combo x${multiplier}!`);
       }
 
-      // Retardo para apreciar la animacion de brinco y recompensa de los finalistas (850ms)
+      // Retardo para apreciar la animacion de brinco y recompensa de los finalistas (1000ms = 1 segundo completo)
       setTimeout(() => {
         popDown(hole);
-      }, 850);
+      }, 1000);
     }
+
 
 
     else {
